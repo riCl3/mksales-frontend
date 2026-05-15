@@ -1,38 +1,37 @@
+'use client'
+
+import { useState, useEffect } from 'react'
 import CategoriesScroll from './CategoriesScroll'
 
-async function getCategories() {
-  const query = `
-    query GetCategories {
-      productCategories(first: 20, where: { hideEmpty: true }) {
-        nodes {
-          name
-          slug
-          image {
-            sourceUrl
-          }
-        }
-      }
-    }
-  `
+export default function CategoriesSection() {
+  const [categories, setCategories] = useState([])
 
-  try {
-    const res = await fetch('https://mksales.co.in/graphql', {
+  useEffect(() => {
+    fetch('https://mksales.co.in/graphql', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      next: { revalidate: 300 },
-      body: JSON.stringify({ query }),
+      body: JSON.stringify({
+        query: `
+          query GetCategories {
+            productCategories(first: 20, where: { hideEmpty: true }) {
+              nodes {
+                name
+                slug
+                image {
+                  sourceUrl
+                }
+              }
+            }
+          }
+        `
+      }),
     })
-
-    const data = await res.json()
-    return data.data?.productCategories?.nodes || []
-  } catch (err) {
-    console.error('Connection Error:', err.message)
-    return []
-  }
-}
-
-export default async function CategoriesSection() {
-  const categories = await getCategories()
+      .then(res => res.json())
+      .then(data => {
+        setCategories(data.data?.productCategories?.nodes || [])
+      })
+      .catch(err => console.error('Connection Error:', err.message))
+  }, [])
 
   return (
     <section id="categories" className="py-22 md:py-30 bg-gradient-to-br from-zinc-200/80 via-zinc-100/50 to-blue-100/40 relative overflow-hidden">

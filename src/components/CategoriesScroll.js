@@ -19,6 +19,18 @@ export default function CategoriesScroll({ categories }) {
   const rafId = useRef(null)
   const paused = useRef(false)
 
+  if (!categories || categories.length === 0) {
+    return (
+      <div className="relative z-10 px-6 md:px-8 lg:px-12 py-8">
+        <div className="flex gap-6 overflow-hidden">
+          {[1, 2, 3, 4].map((i) => (
+            <div key={i} className="flex-shrink-0 w-80 h-72 bg-slate-200 animate-pulse" />
+          ))}
+        </div>
+      </div>
+    )
+  }
+
   useEffect(() => {
     const container = scrollRef.current
     if (!container) return
