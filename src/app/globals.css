@@ -1,26 +1,113 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@layer base {
+  html {
+    font-family: var(--font-inter), Inter, Helvetica Neue, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  body {
+    @apply text-zinc-900;
+    background: linear-gradient(180deg, #ffffff 0%, #f8faff 50%, #f5f8ff 100%);
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+
+  h1 {
+    @apply text-display-2xl;
+  }
+
+  h2 {
+    @apply text-display-xl;
+  }
+
+  h3 {
+    @apply text-display-lg;
+  }
+
+  h4 {
+    @apply text-display-md;
+  }
+
+  p {
+    @apply leading-relaxed text-lg text-zinc-600;
+  }
+
+  a {
+    @apply transition-colors duration-300 ease-in-out-smooth;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 
+           font-medium text-sm uppercase tracking-wider
+           transition-all duration-300 ease-in-out-smooth
+           focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+
+  .btn-primary {
+    @apply btn bg-brand-blue text-white hover:bg-brand-dark focus:ring-brand-blue;
+  }
+
+  .btn-secondary {
+    @apply btn border-2 border-zinc-900 text-zinc-900 hover:bg-zinc-900 hover:text-white focus:ring-zinc-900;
+  }
+
+  .btn-ghost {
+    @apply btn text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100;
+  }
+
+  .link {
+    @apply text-brand-blue hover:text-brand-dark underline-offset-4 hover:underline 
+           transition-colors duration-300 ease-in-out-smooth;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .section-texture {
+    position: relative;
+  }
+
+  .section-texture::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.03) 2px,
+        rgba(0, 0, 0, 0.03) 4px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.03) 2px,
+        rgba(0, 0, 0, 0.03) 4px
+      ),
+      radial-gradient(
+        ellipse 2px 2px at 20px 30px,
+        rgba(0, 0, 0, 0.05),
+        transparent
+      ),
+      radial-gradient(
+        ellipse 1px 1px at 40px 70px,
+        rgba(0, 0, 0, 0.04),
+        transparent
+      );
+    background-size: 50px 50px, 50px 50px, 100px 100px, 150px 150px;
+    pointer-events: none;
+  }
 }
