@@ -1,5 +1,7 @@
 import ProductGrid from '../../components/ProductGrid';
 
+export const dynamic = 'force-dynamic';
+
 async function getProducts() {
   const query = `
     query GetProducts {
