@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 
 async function getProduct(slug) {
-  const GRAPHQL_ENDPOINT = 'http://mksales.co.local/graphql';
+  const GRAPHQL_ENDPOINT = 'https://mksales.co.in/graphql';
   
   const productSlug = typeof slug === 'object' ? slug.slug : slug;
   
@@ -27,7 +27,7 @@ async function getProduct(slug) {
     const res = await fetch(GRAPHQL_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      cache: 'no-store',
+      next: { revalidate: 60 },
       body: JSON.stringify({ query, variables: { id: productSlug } }),
     });
 

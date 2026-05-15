@@ -19,10 +19,10 @@ async function getProducts() {
   `;
 
   try {
-    const res = await fetch('http://mksales.co.local/graphql', {
+    const res = await fetch('https://mksales.co.in/graphql', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      cache: 'no-store',
+      next: { revalidate: 60 },
       body: JSON.stringify({ query }),
     });
 
