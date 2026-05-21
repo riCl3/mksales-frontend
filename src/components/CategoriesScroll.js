@@ -1,7 +1,8 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const gradients = [
   'from-slate-700 to-slate-900',
@@ -16,7 +17,6 @@ const gradients = [
 
 export default function CategoriesScroll({ categories }) {
   const scrollRef = useRef(null)
-  const [paused, setPaused] = useState(false)
 
   const scrollLeft = () => {
     if (scrollRef.current) {
@@ -35,7 +35,7 @@ export default function CategoriesScroll({ categories }) {
       <div className="relative z-10 px-6 md:px-8 lg:px-12 py-8">
         <div className="flex gap-6 overflow-hidden">
           {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="flex-shrink-0 w-80 h-72 bg-slate-200 animate-pulse" />
+            <div key={i} className="flex-shrink-0 w-80 h-72 bg-slate-200 animate-pulse rounded-xl" />
           ))}
         </div>
       </div>
@@ -53,7 +53,7 @@ export default function CategoriesScroll({ categories }) {
             onClick={scrollLeft}
             className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-900 hover:text-white transition-all duration-300"
           >
-            ←
+            &#8592;
           </button>
 
           <button
@@ -61,7 +61,7 @@ export default function CategoriesScroll({ categories }) {
             onClick={scrollRight}
             className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-900 hover:text-white transition-all duration-300"
           >
-            →
+            &#8594;
           </button>
         </div>
       </div>
@@ -70,9 +70,6 @@ export default function CategoriesScroll({ categories }) {
         <div
           ref={scrollRef}
           className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide"
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-          style={{ scrollBehavior: 'smooth' }}
         >
           {categories.map((cat, i) => (
             <Link
@@ -82,10 +79,12 @@ export default function CategoriesScroll({ categories }) {
             >
               <div className={`absolute inset-0 bg-gradient-to-br ${gradients[i % gradients.length]} group-hover:scale-105 transition-transform duration-500`} />
               {cat.image?.sourceUrl && (
-                <img
+                <Image
                   src={cat.image.sourceUrl}
                   alt={cat.name}
-                  className="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-50 transition-opacity duration-500"
+                  fill
+                  sizes="320px"
+                  className="object-cover opacity-30 group-hover:opacity-50 transition-opacity duration-500"
                 />
               )}
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />

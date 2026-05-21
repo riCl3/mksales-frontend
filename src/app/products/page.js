@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import ProductGrid from '../../components/ProductGrid';
 
 export const dynamic = 'force-dynamic';
@@ -76,11 +77,8 @@ export default async function ProductsPage() {
   const [products, categories] = await Promise.all([getProducts(), getCategories()]);
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-white via-zinc-50/50 to-zinc-100/30 relative">
-      <div className="absolute inset-0 opacity-[0.03]" style={{
-        backgroundImage: `radial-gradient(circle at 20px 20px, rgba(0,124,188,0.3) 1px, transparent 1px)`,
-        backgroundSize: '40px 40px'
-      }} />
+    <main className="min-h-screen relative" style={{ background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 30%, #e8f0fe 60%, #dbeafe 100%)' }}>
+      <div className="absolute inset-0 section-texture pointer-events-none" />
 
       <div className="relative z-10 pt-28 pb-24">
         <div className="max-w-7xl mx-auto px-8 md:px-12 lg:px-16">
@@ -92,7 +90,9 @@ export default async function ProductsPage() {
             </p>
           </div>
 
-          <ProductGrid products={products} categories={categories} />
+          <Suspense fallback={<div className="h-96 animate-pulse bg-zinc-100 rounded-xl" />}>
+            <ProductGrid products={products} categories={categories} />
+          </Suspense>
         </div>
       </div>
     </main>

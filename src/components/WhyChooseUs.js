@@ -45,48 +45,15 @@ const features = [
 
 export default function WhyChooseUs() {
   const [expanded, setExpanded] = useState(null)
-  const [visible, setVisible] = useState(false)
-  const sectionRef = useRef(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.1 }
-    )
-    if (sectionRef.current) observer.observe(sectionRef.current)
-    return () => observer.disconnect()
-  }, [])
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden py-24 bg-gradient-to-br from-zinc-200/70 via-zinc-100/60 to-blue-100/30">
+    <section className="relative overflow-hidden py-24 bg-gradient-to-br from-zinc-200/70 via-zinc-100/60 to-blue-100/30">
       <div className="absolute inset-0 section-texture pointer-events-none" />
       <div className="absolute inset-0 bg-gradient-to-t from-brand-blue/10 to-transparent pointer-events-none" />
       <div className="absolute inset-0 opacity-[0.05]" style={{
         backgroundImage: `radial-gradient(circle at 10px 10px, rgba(0,124,188,0.3) 1px, transparent 1px)`,
         backgroundSize: '25px 25px'
       }} />
-
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(12)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute bg-brand-blue/8 rounded-full"
-            style={{
-              width: 1 + i % 3,
-              height: 1 + i % 3,
-              left: `${5 + i * 8}%`,
-              top: `${10 + (i % 6) * 14}%`,
-            }}
-            animate={{ y: [0, -8, 0], opacity: [0.2, 0.6, 0.2] }}
-            transition={{ duration: 3 + i * 0.4, repeat: Infinity, ease: "easeInOut", delay: i * 0.3 }}
-          />
-        ))}
-      </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-8">
         <motion.div
@@ -146,7 +113,7 @@ export default function WhyChooseUs() {
 
                   <div className="mt-3 flex items-center gap-1 text-xs text-zinc-400">
                     <span>{isExpanded ? 'Show less' : 'Click for details'}</span>
-                    <motion.span animate={{ rotate: isExpanded ? 180 : 0 }} transition={{ duration: 0.2 }}>↓</motion.span>
+                    <motion.span animate={{ rotate: isExpanded ? 180 : 0 }} transition={{ duration: 0.2 }}>&#8595;</motion.span>
                   </div>
                 </div>
               </motion.div>

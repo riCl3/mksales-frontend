@@ -23,10 +23,10 @@ export default function Footer() {
         <div>
           <h4 className="font-semibold mb-4 text-white">Categories</h4>
           <ul className="space-y-2 text-slate-400 text-sm">
-            <li><Link href="/categories" className="hover:text-blue-400 transition-colors">Cement</Link></li>
-            <li><Link href="/categories" className="hover:text-blue-400 transition-colors">Steel</Link></li>
-            <li><Link href="/categories" className="hover:text-blue-400 transition-colors">Aggregates</Link></li>
-            <li><Link href="/categories" className="hover:text-blue-400 transition-colors">Bricks</Link></li>
+            <li><Link href="/products?category=cement" className="hover:text-blue-400 transition-colors">Cement</Link></li>
+            <li><Link href="/products?category=steel" className="hover:text-blue-400 transition-colors">Steel</Link></li>
+            <li><Link href="/products?category=aggregates" className="hover:text-blue-400 transition-colors">Aggregates</Link></li>
+            <li><Link href="/products?category=bricks" className="hover:text-blue-400 transition-colors">Bricks</Link></li>
           </ul>
         </div>
         <div>

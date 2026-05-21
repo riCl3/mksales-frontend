@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { Shield, Truck, Clock, Award, ArrowRight } from 'lucide-react'
 
@@ -16,13 +17,14 @@ export default function ProductDetailClient({ product }) {
   const categories = product.productCategories?.nodes || []
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-white via-zinc-50/50 to-zinc-100/30">
+    <main className="min-h-screen relative" style={{ background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 30%, #e8f0fe 60%, #dbeafe 100%)' }}>
+      <div className="absolute inset-0 section-texture pointer-events-none" />
       {/* Breadcrumb */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="pt-24 pb-4 max-w-7xl mx-auto px-8 md:px-12 lg:px-16"
+        className="relative z-10 pt-24 pb-4 max-w-7xl mx-auto px-8 md:px-12 lg:px-16"
       >
         <nav className="flex items-center gap-2 text-sm text-zinc-500">
           <Link href="/" className="hover:text-brand-blue transition-colors">Home</Link>
@@ -34,7 +36,7 @@ export default function ProductDetailClient({ product }) {
       </motion.div>
 
       {/* Product Hero */}
-      <section className="max-w-7xl mx-auto px-8 md:px-12 lg:px-16 pb-20">
+      <section className="relative z-10 max-w-7xl mx-auto px-8 md:px-12 lg:px-16 pb-20">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
           {/* Image */}
           <motion.div
@@ -45,10 +47,13 @@ export default function ProductDetailClient({ product }) {
           >
             <div className="relative aspect-square rounded-2xl overflow-hidden bg-slate-100 group shadow-sm">
               {product.image?.sourceUrl ? (
-                <img
+                <Image
                   src={product.image.sourceUrl}
                   alt={product.name}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  priority
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200">

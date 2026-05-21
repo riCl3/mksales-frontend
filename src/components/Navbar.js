@@ -2,11 +2,11 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Search, Menu, X } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
+import SearchBar from './SearchBar'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
-  const [searchFocused, setSearchFocused] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
@@ -48,55 +48,35 @@ export default function Navbar() {
           <span className={`${scrolled ? 'text-gray-800' : 'text-blue-400'} ml-1`}>Sales</span>
         </Link>
 
-        <div className={`hidden md:flex items-center flex-1 max-w-md transition-all duration-300 ${searchFocused ? 'scale-[1.02]' : ''}`}>
-          <div className="relative w-full">
-            <div className={`absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none ${
-              scrolled ? 'text-gray-400' : 'text-white/60'
-            }`}>
-              <Search className="w-4 h-4" />
-            </div>
-            <input
-              type="text"
-              placeholder="Search products..."
-              className={`w-full pl-10 pr-4 py-2 text-sm rounded-full outline-none transition-all duration-300 ${
-                scrolled
-                  ? 'bg-white/60 border border-gray-200/50 text-gray-800 placeholder-gray-400 backdrop-blur-md'
-                  : 'bg-white/10 border border-white/20 text-white placeholder-white/50 backdrop-blur-md'
-              } ${
-                searchFocused
-                  ? 'ring-2 ring-blue-400/50 border-transparent shadow-lg shadow-blue-500/10'
-                  : ''
-              }`}
-              onFocus={() => setSearchFocused(true)}
-              onBlur={() => setSearchFocused(false)}
-            />
-          </div>
-        </div>
-
         <div className="hidden md:flex items-center gap-8 shrink-0">
           <Link href="/" className={navLinkClass()}>Home</Link>
           <button onClick={() => scrollToSection('categories')} className={navLinkClass()}>Categories</button>
           <Link href="/products" className={navLinkClass()}>Products</Link>
           <Link href="/contact" className={navLinkClass()}>Contact</Link>
+          <SearchBar scrolled={scrolled} />
           <Link
             href="/contact"
-            className="px-5 py-2 bg-brand-blue text-white text-sm font-semibold hover:bg-brand-dark transition-colors duration-300"
+            className="px-5 py-2 bg-brand-blue text-white text-sm font-semibold hover:bg-brand-dark transition-colors duration-300 rounded-lg"
           >
             Get Quote
           </Link>
         </div>
 
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden relative z-50 p-2"
-          aria-label="Toggle menu"
-        >
-          {menuOpen ? (
-            <X className={`w-6 h-6 ${scrolled ? 'text-gray-800' : 'text-white'}`} />
-          ) : (
-            <Menu className={`w-6 h-6 ${scrolled ? 'text-gray-800' : 'text-white'}`} />
-          )}
-        </button>
+        {/* Mobile: search + hamburger */}
+        <div className="md:hidden flex items-center gap-2">
+          <SearchBar scrolled={scrolled} />
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="relative z-50 p-2"
+            aria-label="Toggle menu"
+          >
+            {menuOpen ? (
+              <X className={`w-6 h-6 ${scrolled ? 'text-gray-800' : 'text-white'}`} />
+            ) : (
+              <Menu className={`w-6 h-6 ${scrolled ? 'text-gray-800' : 'text-white'}`} />
+            )}
+          </button>
+        </div>
       </nav>
 
       {menuOpen && (
@@ -109,7 +89,7 @@ export default function Navbar() {
             <Link
               href="/contact"
               onClick={() => setMenuOpen(false)}
-              className="px-8 py-3 bg-brand-blue text-white font-semibold hover:bg-brand-dark transition-colors duration-300 mt-4"
+              className="px-8 py-3 bg-brand-blue text-white font-semibold hover:bg-brand-dark transition-colors duration-300 mt-4 rounded-lg"
             >
               Get Quote
             </Link>

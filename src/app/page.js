@@ -21,15 +21,7 @@ export default function HomePage() {
       <TestimonialsSection />
 
       <section className="py-24 bg-gradient-to-br from-zinc-200/70 via-zinc-100/50 to-blue-100/30 text-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-brand-blue/10 via-brand-blue/5 to-transparent pointer-events-none" />
-        <div className="absolute inset-0 opacity-[0.06]" style={{
-          backgroundImage: `radial-gradient(circle, rgba(0,124,188,0.3) 1px, transparent 1px)`,
-          backgroundSize: '25px 25px'
-        }} />
-        <div className="absolute inset-0 opacity-[0.03]" style={{
-          backgroundImage: `repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0,124,188,0.3) 2px, rgba(0,124,188,0.3) 3px)`,
-          backgroundSize: '35px 35px'
-        }} />
+        <div className="absolute inset-0 section-texture pointer-events-none" />
         <div className="relative z-10 max-w-2xl mx-auto px-8">
           <div className="w-12 h-1 bg-brand-blue mx-auto mb-4" />
           <h2 className="text-display-md text-slate-900 mb-4">Browse Our Products</h2>
