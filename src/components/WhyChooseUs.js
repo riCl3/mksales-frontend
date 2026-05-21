@@ -1,58 +1,47 @@
 'use client'
 
-import { useEffect, useState, useRef, useCallback } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Layers, Shield, Truck, Clock, Handshake, Star } from 'lucide-react'
 
 const features = [
-  { title: 'Diverse & Scalable Solutions', description: 'Infrastructure and industrial products for projects of all sizes.', metric: '5000+', unit: 'Orders Delivered', icon: Layers },
-  { title: 'Quality You Can Depend On', description: 'Products sourced and tested for superior performance and durability.', metric: '100%', unit: 'BIS Compliant', icon: Shield },
-  { title: 'Efficient Supply Chain', description: 'Robust vendor partnerships ensuring consistency and competitive pricing.', metric: '200+', unit: 'Vetted Suppliers', icon: Truck },
-  { title: 'On-Time, Every Time', description: 'A commitment to timely delivery that keeps your projects on track.', metric: '98.7%', unit: 'On-Time Delivery', icon: Clock },
-  { title: 'Relationship-Driven', description: 'We believe in building partnerships, not just transactions.', metric: '92%', unit: 'Client Retention', icon: Handshake },
-  { title: 'Industry Expertise', description: 'Deep understanding of project needs for practical solutions that work.', metric: '15+', unit: 'Years Avg Experience', icon: Star },
+  {
+    title: 'Diverse & Scalable Solutions',
+    description: 'Infrastructure and industrial products for projects of all sizes — from single-site builds to nationwide rollouts.',
+    badge: 'Enterprise Ready',
+    icon: Layers,
+  },
+  {
+    title: 'Quality You Can Depend On',
+    description: 'Every product sourced and tested to meet rigorous performance and durability standards.',
+    badge: 'Certified Quality',
+    icon: Shield,
+  },
+  {
+    title: 'Efficient Supply Chain',
+    description: 'Robust vendor partnerships ensuring consistency, competitive pricing, and zero supply gaps.',
+    badge: 'Pan-India Network',
+    icon: Truck,
+  },
+  {
+    title: 'On-Time, Every Time',
+    description: 'A proven track record of timely delivery that keeps your projects on schedule and on budget.',
+    badge: 'Trusted Reliability',
+    icon: Clock,
+  },
+  {
+    title: 'Relationship-Driven',
+    description: 'We build long-term partnerships, not just transactions — your success is our metric.',
+    badge: 'Long-Term Partners',
+    icon: Handshake,
+  },
+  {
+    title: 'Industry Expertise',
+    description: 'Deep domain knowledge across construction materials, backed by decades of hands-on experience.',
+    badge: 'Seasoned Experts',
+    icon: Star,
+  },
 ]
-
-function CountUp({ end, suffix }) {
-  const [count, setCount] = useState('0')
-  const ref = useRef(null)
-  const counted = useRef(false)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !counted.current) {
-          counted.current = true
-          const isNumeric = !isNaN(parseFloat(end))
-          if (!isNumeric) { setCount(end); return }
-
-          const target = parseFloat(end)
-          const duration = 1500
-          const startTime = performance.now()
-
-          const animate = (now) => {
-            const elapsed = now - startTime
-            const progress = Math.min(elapsed / duration, 1)
-            const current = (target * progress).toFixed(target % 1 === 0 ? 0 : 1)
-            setCount(current + suffix)
-            if (progress < 1) requestAnimationFrame(animate)
-          }
-
-          requestAnimationFrame(animate)
-        }
-      },
-      { threshold: 0.5 }
-    )
-
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [end, suffix])
-
-  return <span ref={ref}>{count}</span>
-}
 
 export default function WhyChooseUs() {
   const [expanded, setExpanded] = useState(null)
@@ -136,12 +125,9 @@ export default function WhyChooseUs() {
                     <div className="w-10 h-10 rounded-lg bg-brand-blue/10 flex items-center justify-center group-hover:bg-brand-blue/20 transition-colors">
                       <Icon className="w-5 h-5 text-brand-blue" />
                     </div>
-                    <div className="text-right">
-                      <div className="text-2xl font-bold text-brand-blue leading-none">
-                        <CountUp end={feature.metric} suffix="" />
-                      </div>
-                      <div className="text-[10px] text-zinc-400 uppercase tracking-wider mt-1">{feature.unit}</div>
-                    </div>
+                    <span className="inline-flex items-center px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-brand-blue bg-brand-blue/10 rounded-full">
+                      {feature.badge}
+                    </span>
                   </div>
 
                   <h3 className="text-base font-semibold text-slate-900 mb-1.5 group-hover:text-brand-blue transition-colors">
@@ -154,7 +140,7 @@ export default function WhyChooseUs() {
 
                   <div className={`mt-4 pt-3 border-t border-zinc-100 overflow-hidden transition-all duration-300 ${isExpanded ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}>
                     <p className="text-sm text-zinc-500 leading-relaxed">
-                      {feature.title} — {feature.metric} {feature.unit.toLowerCase()}. Trusted by leading infrastructure companies across India for consistent quality and reliable supply.
+                      Trusted by leading infrastructure companies across India for consistent quality and reliable supply. We deliver where others can&apos;t.
                     </p>
                   </div>
 
