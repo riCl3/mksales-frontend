@@ -49,9 +49,9 @@ export default function WhyChooseUs() {
   return (
     <section className="relative overflow-hidden py-24 bg-gradient-to-br from-zinc-200/70 via-zinc-100/60 to-blue-100/30">
       <div className="absolute inset-0 section-texture pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-t from-brand-blue/10 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-brand-green/10 to-transparent pointer-events-none" />
       <div className="absolute inset-0 opacity-[0.05]" style={{
-        backgroundImage: `radial-gradient(circle at 10px 10px, rgba(0,124,188,0.3) 1px, transparent 1px)`,
+        backgroundImage: `radial-gradient(circle at 10px 10px, rgba(0,143,55,0.3) 1px, transparent 1px)`,
         backgroundSize: '25px 25px'
       }} />
 
@@ -86,18 +86,18 @@ export default function WhyChooseUs() {
               >
                 <div
                   onClick={() => setExpanded(isExpanded ? null : index)}
-                  className="relative h-full cursor-pointer bg-white rounded-xl border border-zinc-200/70 p-6 hover:border-brand-blue/40 hover:shadow-lg transition-all duration-300"
+                  className="relative h-full cursor-pointer bg-white rounded-xl border border-zinc-200/70 p-6 hover:border-brand-green/40 hover:shadow-lg transition-all duration-300"
                 >
                   <div className="flex items-start justify-between mb-4">
-                    <div className="w-10 h-10 rounded-lg bg-brand-blue/10 flex items-center justify-center group-hover:bg-brand-blue/20 transition-colors">
-                      <Icon className="w-5 h-5 text-brand-blue" />
+                    <div className="w-10 h-10 rounded-lg bg-brand-green/10 flex items-center justify-center group-hover:bg-brand-green/20 transition-colors">
+                      <Icon className="w-5 h-5 text-brand-green" />
                     </div>
-                    <span className="inline-flex items-center px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-brand-blue bg-brand-blue/10 rounded-full">
+                    <span className="inline-flex items-center px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-brand-green bg-brand-green/10 rounded-full">
                       {feature.badge}
                     </span>
                   </div>
 
-                  <h3 className="text-base font-semibold text-slate-900 mb-1.5 group-hover:text-brand-blue transition-colors">
+                  <h3 className="text-base font-semibold text-slate-900 mb-1.5 group-hover:text-brand-green transition-colors">
                     {feature.title}
                   </h3>
 

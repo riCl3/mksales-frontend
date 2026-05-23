@@ -28,7 +28,7 @@ export default function HomePage() {
           <p className="text-lg text-zinc-600 mb-8">
             Explore our complete catalog of premium construction materials.
           </p>
-          <Link href="/products" className="inline-flex px-8 py-3 bg-brand-blue text-white font-semibold hover:bg-blue-600 transition-colors duration-300">
+          <Link href="/products" className="inline-flex px-8 py-3 bg-brand-blue text-white font-semibold hover:bg-brand-dark transition-colors duration-300">
             View All Products →
           </Link>
         </div>

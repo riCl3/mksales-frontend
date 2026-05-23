@@ -92,10 +92,10 @@ export default function TestimonialsSection() {
         backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 1px)`,
         backgroundSize: '30px 30px'
       }} />
-      <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/10 via-transparent to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-br from-brand-green/10 via-transparent to-transparent pointer-events-none" />
 
       {/* Decorative glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-blue/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-green/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative z-10 max-w-4xl mx-auto px-8">
         <motion.div
@@ -127,7 +127,7 @@ export default function TestimonialsSection() {
             >
               {/* Quote icon */}
               <div className="absolute -top-5 left-8 md:left-12">
-                <div className="w-10 h-10 bg-brand-blue rounded-xl flex items-center justify-center shadow-lg shadow-brand-blue/30">
+                <div className="w-10 h-10 bg-brand-green rounded-xl flex items-center justify-center shadow-lg shadow-brand-green/30">
                   <Quote className="w-5 h-5 text-white" />
                 </div>
               </div>
@@ -148,7 +148,7 @@ export default function TestimonialsSection() {
 
               {/* Author */}
               <div className="flex items-center gap-4 pt-6 border-t border-white/10">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-brand-blue to-blue-400 flex items-center justify-center text-white font-bold text-sm shrink-0">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-brand-green to-blue-400 flex items-center justify-center text-white font-bold text-sm shrink-0">
                   {t.name.split(' ').map(n => n[0]).join('')}
                 </div>
                 <div>
@@ -164,7 +164,7 @@ export default function TestimonialsSection() {
         <div className="flex items-center justify-center gap-6 mt-10">
           <button
             onClick={() => { clearInterval(intervalRef.current); paginate(-1); intervalRef.current = setInterval(() => paginate(1), 6000) }}
-            className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:bg-brand-blue hover:text-white hover:border-brand-blue transition-all duration-300"
+            className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:bg-brand-green hover:text-white hover:border-brand-green transition-all duration-300"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
@@ -175,7 +175,7 @@ export default function TestimonialsSection() {
                 key={i}
                 onClick={() => goTo(i)}
                 className={`h-2 rounded-full transition-all duration-400 ${
-                  i === current ? 'bg-brand-blue w-8' : 'bg-white/20 w-2 hover:bg-white/40'
+                  i === current ? 'bg-brand-green w-8' : 'bg-white/20 w-2 hover:bg-white/40'
                 }`}
               />
             ))}
@@ -183,7 +183,7 @@ export default function TestimonialsSection() {
 
           <button
             onClick={() => { clearInterval(intervalRef.current); paginate(1); intervalRef.current = setInterval(() => paginate(1), 6000) }}
-            className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:bg-brand-blue hover:text-white hover:border-brand-blue transition-all duration-300"
+            className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:bg-brand-green hover:text-white hover:border-brand-green transition-all duration-300"
           >
             <ChevronRight className="w-5 h-5" />
           </button>

@@ -10,7 +10,7 @@ const gradients = [
   'from-zinc-600 to-zinc-800',
   'from-stone-500 to-stone-700',
   'from-slate-500 to-slate-700',
-  'from-blue-700 to-blue-900',
+  'from-green-800 to-green-950',
   'from-gray-600 to-gray-800',
   'from-slate-800 to-zinc-900',
 ]

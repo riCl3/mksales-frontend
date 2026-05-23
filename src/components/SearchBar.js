@@ -119,7 +119,7 @@ export default function SearchBar({ scrolled }) {
         onClick={() => setOpen(!open)}
         className={`p-2 rounded-lg transition-all duration-300 ${
           scrolled
-            ? 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
+            ? 'text-gray-600 hover:text-brand-green hover:bg-brand-green/5'
             : 'text-white/80 hover:text-white hover:bg-white/10'
         }`}
         aria-label="Search"
@@ -151,7 +151,7 @@ export default function SearchBar({ scrolled }) {
           <div className="max-h-80 overflow-y-auto">
             {loading && (
               <div className="px-4 py-6 text-center">
-                <div className="inline-block w-5 h-5 border-2 border-brand-blue/30 border-t-brand-blue rounded-full animate-spin" />
+                <div className="inline-block w-5 h-5 border-2 border-brand-green/30 border-t-brand-green rounded-full animate-spin" />
               </div>
             )}
 
@@ -184,7 +184,7 @@ export default function SearchBar({ scrolled }) {
                   )}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-slate-800 truncate group-hover:text-brand-blue transition-colors">
+                  <p className="text-sm font-medium text-slate-800 truncate group-hover:text-brand-green transition-colors">
                     {product.name}
                   </p>
                   {(product.price || product.regularPrice) && (
@@ -193,7 +193,7 @@ export default function SearchBar({ scrolled }) {
                     </p>
                   )}
                 </div>
-                <ArrowRight className="w-4 h-4 text-zinc-300 group-hover:text-brand-blue transition-colors shrink-0" />
+                <ArrowRight className="w-4 h-4 text-zinc-300 group-hover:text-brand-green transition-colors shrink-0" />
               </Link>
             ))}
           </div>
@@ -202,7 +202,7 @@ export default function SearchBar({ scrolled }) {
           {query.length >= 2 && !loading && (
             <button
               onClick={handleSubmit}
-              className="w-full px-4 py-3 text-sm font-medium text-brand-blue hover:bg-brand-blue/5 transition-colors border-t border-zinc-100 flex items-center justify-center gap-1.5"
+              className="w-full px-4 py-3 text-sm font-medium text-brand-green hover:bg-brand-green/5 transition-colors border-t border-zinc-100 flex items-center justify-center gap-1.5"
             >
               View all results for &ldquo;{query}&rdquo;
               <ArrowRight className="w-3.5 h-3.5" />

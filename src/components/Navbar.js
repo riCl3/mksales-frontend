@@ -30,13 +30,13 @@ export default function Navbar() {
 
   const navLinkClass = () => {
     const base = 'text-sm font-bold uppercase tracking-widest transition-all duration-300'
-    return `${base} ${scrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-400 drop-shadow-md'}`
+    return `${base} ${scrolled ? 'text-gray-700 hover:text-brand-green' : 'text-white hover:text-brand-green drop-shadow-md'}`
   }
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
       scrolled
-        ? 'bg-white/80 backdrop-blur-2xl border-b border-blue-400/30 shadow-xl shadow-blue-900/5'
+        ? 'bg-white/80 backdrop-blur-2xl border-b border-brand-green/30 shadow-xl shadow-brand-green/5'
         : 'bg-gradient-to-b from-black/50 via-black/30 to-transparent'
     }`}>
       <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 md:px-8 py-4 gap-4">
@@ -44,8 +44,8 @@ export default function Navbar() {
           href="/"
           className="text-2xl font-bold tracking-wide transition-colors duration-300 shrink-0"
         >
-          <span className={scrolled ? 'text-blue-600' : 'text-white'}>MK</span>
-          <span className={`${scrolled ? 'text-gray-800' : 'text-blue-400'} ml-1`}>Sales</span>
+          <span className={scrolled ? 'text-brand-blue' : 'text-white'}>MK</span>
+          <span className={`${scrolled ? 'text-gray-800' : 'text-brand-blue'} ml-1`}>Sales</span>
         </Link>
 
         <div className="hidden md:flex items-center gap-8 shrink-0">
@@ -82,10 +82,10 @@ export default function Navbar() {
       {menuOpen && (
         <div className="fixed inset-0 z-40 bg-slate-900/95 backdrop-blur-xl">
           <div className="flex flex-col items-center justify-center h-full gap-10">
-            <Link href="/" onClick={() => setMenuOpen(false)} className="text-white text-lg font-bold uppercase tracking-widest hover:text-blue-300 transition-colors">Home</Link>
-            <button onClick={() => scrollToSection('categories')} className="text-white text-lg font-bold uppercase tracking-widest hover:text-blue-300 transition-colors">Categories</button>
-            <Link href="/products" onClick={() => setMenuOpen(false)} className="text-white text-lg font-bold uppercase tracking-widest hover:text-blue-300 transition-colors">Products</Link>
-            <Link href="/contact" onClick={() => setMenuOpen(false)} className="text-white text-lg font-bold uppercase tracking-widest hover:text-blue-300 transition-colors">Contact</Link>
+            <Link href="/" onClick={() => setMenuOpen(false)} className="text-white text-lg font-bold uppercase tracking-widest hover:text-brand-green transition-colors">Home</Link>
+            <button onClick={() => scrollToSection('categories')} className="text-white text-lg font-bold uppercase tracking-widest hover:text-brand-green transition-colors">Categories</button>
+            <Link href="/products" onClick={() => setMenuOpen(false)} className="text-white text-lg font-bold uppercase tracking-widest hover:text-brand-green transition-colors">Products</Link>
+            <Link href="/contact" onClick={() => setMenuOpen(false)} className="text-white text-lg font-bold uppercase tracking-widest hover:text-brand-green transition-colors">Contact</Link>
             <Link
               href="/contact"
               onClick={() => setMenuOpen(false)}

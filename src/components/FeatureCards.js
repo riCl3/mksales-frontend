@@ -14,7 +14,7 @@ export default function FeatureCards() {
             transition={{ duration: 0.6 }}
             className="bg-gradient-to-br from-slate-900 to-slate-800 p-8 rounded-2xl shadow-xl shadow-slate-900/10"
           >
-            <div className="w-12 h-12 bg-brand-blue/20 rounded-xl flex items-center justify-center text-brand-blue text-2xl mb-4">✓</div>
+            <div className="w-12 h-12 bg-brand-green/20 rounded-xl flex items-center justify-center text-brand-green text-2xl mb-4">✓</div>
             <h3 className="text-lg font-bold text-white mb-2">Premium Quality</h3>
             <p className="text-slate-400 text-sm">ISO 9001 certified materials tested for durability and performance standards.</p>
           </motion.div>
@@ -25,7 +25,7 @@ export default function FeatureCards() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="bg-gradient-to-br from-slate-800 to-slate-700 p-8 rounded-2xl shadow-xl shadow-slate-900/10"
           >
-            <div className="w-12 h-12 bg-brand-blue/20 rounded-xl flex items-center justify-center text-brand-blue text-2xl mb-4">📦</div>
+            <div className="w-12 h-12 bg-brand-green/20 rounded-xl flex items-center justify-center text-brand-green text-2xl mb-4">📦</div>
             <h3 className="text-lg font-bold text-white mb-2">Pan-India Supply</h3>
             <p className="text-slate-400 text-sm">Reliable logistics network delivering to 500+ locations across India.</p>
           </motion.div>
@@ -34,7 +34,7 @@ export default function FeatureCards() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="bg-gradient-to-br from-brand-blue to-blue-600 p-8 rounded-2xl shadow-xl shadow-brand-blue/20"
+            className="bg-gradient-to-br from-brand-green to-blue-600 p-8 rounded-2xl shadow-xl shadow-brand-green/20"
           >
             <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-white text-2xl mb-4">₹</div>
             <h3 className="text-lg font-bold text-white mb-2">Bulk Pricing</h3>

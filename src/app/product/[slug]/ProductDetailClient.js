@@ -115,7 +115,7 @@ export default function ProductDetailClient({ product }) {
             <div className="flex flex-wrap gap-4 mb-10">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 px-8 py-3.5 bg-brand-blue text-white font-semibold text-sm uppercase tracking-wider hover:bg-brand-dark transition-all duration-300 rounded-lg group"
+                className="inline-flex items-center gap-2 px-8 py-3.5 bg-brand-green text-white font-semibold text-sm uppercase tracking-wider hover:bg-brand-dark transition-all duration-300 rounded-lg group"
               >
                 Get Quote
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -162,7 +162,7 @@ export default function ProductDetailClient({ product }) {
           >
             <div className="max-w-4xl">
               <h2 className="text-2xl font-bold text-slate-900 mb-2">Specifications</h2>
-              <div className="w-16 h-1 bg-brand-blue mb-8" />
+              <div className="w-16 h-1 bg-brand-green mb-8" />
               <div
                 className="text-base text-zinc-600 leading-relaxed prose prose-slate max-w-none"
                 dangerouslySetInnerHTML={{ __html: product.description || product.shortDescription }}

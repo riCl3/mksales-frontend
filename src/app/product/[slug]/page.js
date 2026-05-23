@@ -57,7 +57,7 @@ export default async function ProductPage({ params }) {
       <main className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center px-6">
           <h1 className="text-4xl font-bold text-slate-900 mb-4">Product Not Found</h1>
-          <Link href="/products" className="text-blue-600 font-semibold hover:underline">
+          <Link href="/products" className="text-brand-green font-semibold hover:underline">
             ← Back to Products
           </Link>
         </div>

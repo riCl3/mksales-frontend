@@ -18,7 +18,7 @@ export default function Header() {
           <div className="flex items-center gap-4">
             {/* Logo */}
             <Link href="/" className="text-xl font-black tracking-tight shrink-0">
-              MK<span className="text-[#007CBC]">SALES</span>
+              MK<span className="text-[#007CBD]">SALES</span>
             </Link>
 
             {/* Search Bar - Centered */}
@@ -30,7 +30,7 @@ export default function Header() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search products..."
-                  className="w-full pl-10 pr-4 py-2.5 bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 dark:text-zinc-100 rounded-full text-sm focus:outline-none focus:border-[#007CBC] focus:ring-1 focus:ring-[#007CBC]"
+                  className="w-full pl-10 pr-4 py-2.5 bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 dark:text-zinc-100 rounded-full text-sm focus:outline-none focus:border-[#007CBD] focus:ring-1 focus:ring-[#007CBD]"
                 />
               </div>
             </div>
@@ -47,7 +47,7 @@ export default function Header() {
               <span className="hidden lg:block text-sm font-medium cursor-pointer">
                 Sell With Us
               </span>
-              <button className="bg-[#007CBC] text-white px-4 py-2 rounded text-sm font-bold hover:opacity-90 transition-opacity">
+              <button className="bg-[#007CBD] text-white px-4 py-2 rounded text-sm font-bold hover:opacity-90 transition-opacity">
                 Submit Enquiry
               </button>
               <button className="border border-zinc-900 dark:border-zinc-100 text-zinc-900 dark:text-zinc-100 px-4 py-2 rounded text-sm font-bold hover:opacity-90 transition-opacity">
@@ -68,7 +68,7 @@ export default function Header() {
                   key={cat}
                   href={`/?category=${cat}`}
                   className={`px-4 py-3 text-sm font-medium text-white hover:bg-gray-800 transition-colors ${
-                    i === 0 ? 'bg-[#007CBC]' : ''
+                    i === 0 ? 'bg-[#007CBD]' : ''
                   }`}
                 >
                   {cat}

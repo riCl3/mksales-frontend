@@ -12,7 +12,7 @@ export default function ContactPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="w-12 h-1 bg-brand-blue mb-4" />
+          <div className="w-12 h-1 bg-brand-green mb-4" />
           <h1 className="text-display-xl text-slate-900 mb-4">Contact Us</h1>
           <p className="text-lg text-zinc-600 mb-14 max-w-2xl">
             Get in touch for quotes, bulk orders, or any inquiries about our construction materials.
@@ -28,8 +28,8 @@ export default function ContactPage() {
             className="lg:col-span-2 space-y-8"
           >
             <div className="flex items-start gap-4">
-              <div className="w-10 h-10 rounded-lg bg-brand-blue/10 flex items-center justify-center shrink-0">
-                <Mail className="w-5 h-5 text-brand-blue" />
+              <div className="w-10 h-10 rounded-lg bg-brand-green/10 flex items-center justify-center shrink-0">
+                <Mail className="w-5 h-5 text-brand-green" />
               </div>
               <div>
                 <h3 className="text-sm font-bold uppercase tracking-wider text-zinc-500 mb-1">Email</h3>
@@ -38,8 +38,8 @@ export default function ContactPage() {
             </div>
 
             <div className="flex items-start gap-4">
-              <div className="w-10 h-10 rounded-lg bg-brand-blue/10 flex items-center justify-center shrink-0">
-                <Phone className="w-5 h-5 text-brand-blue" />
+              <div className="w-10 h-10 rounded-lg bg-brand-green/10 flex items-center justify-center shrink-0">
+                <Phone className="w-5 h-5 text-brand-green" />
               </div>
               <div>
                 <h3 className="text-sm font-bold uppercase tracking-wider text-zinc-500 mb-1">Phone</h3>
@@ -48,8 +48,8 @@ export default function ContactPage() {
             </div>
 
             <div className="flex items-start gap-4">
-              <div className="w-10 h-10 rounded-lg bg-brand-blue/10 flex items-center justify-center shrink-0">
-                <MapPin className="w-5 h-5 text-brand-blue" />
+              <div className="w-10 h-10 rounded-lg bg-brand-green/10 flex items-center justify-center shrink-0">
+                <MapPin className="w-5 h-5 text-brand-green" />
               </div>
               <div>
                 <h3 className="text-sm font-bold uppercase tracking-wider text-zinc-500 mb-1">Address</h3>
@@ -67,15 +67,15 @@ export default function ContactPage() {
           >
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-2">Name</label>
-              <input type="text" id="name" className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:border-brand-blue focus:ring-1 focus:ring-brand-blue outline-none transition-colors" />
+              <input type="text" id="name" className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:border-brand-green focus:ring-1 focus:ring-brand-green outline-none transition-colors" />
             </div>
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-2">Email</label>
-              <input type="email" id="email" className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:border-brand-blue focus:ring-1 focus:ring-brand-blue outline-none transition-colors" />
+              <input type="email" id="email" className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:border-brand-green focus:ring-1 focus:ring-brand-green outline-none transition-colors" />
             </div>
             <div>
               <label htmlFor="message" className="block text-sm font-medium text-slate-700 mb-2">Message</label>
-              <textarea id="message" rows="5" className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:border-brand-blue focus:ring-1 focus:ring-brand-blue outline-none transition-colors resize-none"></textarea>
+              <textarea id="message" rows="5" className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:border-brand-green focus:ring-1 focus:ring-brand-green outline-none transition-colors resize-none"></textarea>
             </div>
             <button type="submit" className="inline-flex items-center gap-2 px-8 py-3 bg-brand-blue text-white font-semibold rounded-lg hover:bg-brand-dark transition-colors duration-300 group">
               Send Message
