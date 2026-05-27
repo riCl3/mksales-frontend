@@ -66,9 +66,11 @@ export default function SearchResults() {
 
   if (!q) {
     return (
-      <div className="text-center py-20">
-        <Search className="w-12 h-12 text-zinc-300 mx-auto mb-4" />
-        <p className="text-zinc-500 text-lg">Enter a search term to find products.</p>
+      <div className="text-center py-20 bg-white rounded-2xl border border-brand-green/10 shadow-sm">
+        <div className="w-16 h-16 bg-brand-green/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <Search className="w-8 h-8 text-brand-green" />
+        </div>
+        <p className="text-zinc-600 font-medium">Enter a search term to find products.</p>
       </div>
     )
   }
@@ -91,21 +93,24 @@ export default function SearchResults() {
 
   return (
     <div>
-      <div className="mb-6">
+      <div className="mb-6 flex items-center gap-3">
+        <span className="inline-block w-1 h-4 bg-brand-green rounded-full" />
         <p className="text-sm text-zinc-500">
           {results.length === 0 ? 'No results' : `Showing`}{' '}
-          <span className="font-semibold text-slate-700">{results.length}</span>{' '}
+          <span className="font-semibold text-brand-green">{results.length}</span>{' '}
           {results.length === 1 ? 'result' : 'results'} for{' '}
-          <span className="font-semibold text-slate-700">&ldquo;{q}&rdquo;</span>
+          <span className="font-semibold text-brand-green">&ldquo;{q}&rdquo;</span>
         </p>
       </div>
 
       {results.length === 0 ? (
-        <div className="text-center py-20">
-          <Search className="w-12 h-12 text-zinc-300 mx-auto mb-4" />
-          <p className="text-zinc-500 text-lg mb-2">No products match your search.</p>
-          <p className="text-zinc-400 text-sm mb-6">Try different keywords or browse all products.</p>
-          <Link href="/products" className="inline-flex items-center gap-2 text-brand-green font-medium hover:underline">
+        <div className="text-center py-20 bg-white rounded-2xl border border-brand-green/10 shadow-sm">
+          <div className="w-16 h-16 bg-brand-green/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <Search className="w-8 h-8 text-brand-green" />
+          </div>
+          <p className="text-zinc-600 font-medium mb-2">No products match your search.</p>
+          <p className="text-zinc-500 text-sm mb-6">Try different keywords or browse all products.</p>
+          <Link href="/products" className="inline-flex items-center gap-2 px-5 py-2 bg-brand-green text-white text-sm font-medium rounded-lg hover:bg-brand-dark transition-colors duration-300">
             Browse all products <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -120,7 +125,8 @@ export default function SearchResults() {
                 transition={{ duration: 0.3, delay: index * 0.04 }}
               >
                 <Link href={`/product/${product.slug}`} className="group block h-full">
-                  <div className="relative h-full bg-white rounded-xl border border-zinc-200/70 overflow-hidden hover:border-brand-green/30 hover:shadow-xl transition-all duration-500">
+                  <div className="relative h-full bg-white rounded-xl border border-zinc-200/70 overflow-hidden hover:border-brand-green/30 hover:shadow-xl hover:shadow-brand-green/5 transition-all duration-500">
+                    <div className="absolute top-0 left-0 right-0 h-0.5 bg-brand-green scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-10" />
                     <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
                       {product.image?.sourceUrl ? (
                         <Image
@@ -153,7 +159,7 @@ export default function SearchResults() {
                         ) : (
                           <span className="text-xs text-zinc-400 uppercase tracking-wider">Price on request</span>
                         )}
-                        <span className="inline-flex items-center gap-1.5 px-4 py-2 bg-slate-900 text-white text-xs font-medium rounded-lg group-hover:bg-brand-green transition-colors duration-300">
+                        <span className="inline-flex items-center gap-1.5 px-4 py-2 bg-brand-green text-white text-xs font-medium rounded-lg group-hover:bg-brand-dark transition-colors duration-300">
                           View
                           <ArrowRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-0.5" />
                         </span>

@@ -5,6 +5,10 @@ export default function Section({ children, className = '', background = 'white'
     dark: 'bg-zinc-900',
     blue: 'bg-brand-blue',
     concrete: 'bg-zinc-100',
+    green: 'bg-brand-green',
+    'dark-green': 'bg-brand-dark',
+    'gradient-blue': 'bg-gradient-to-br from-brand-blue to-brand-dark',
+    'gradient-green': 'bg-gradient-to-br from-brand-green to-brand-dark',
   }
 
   const paddingClasses = {
