@@ -5,14 +5,14 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 const gradients = [
+  'from-brand-blue to-brand-dark',
+  'from-brand-green to-brand-dark',
   'from-slate-700 to-slate-900',
-  'from-slate-600 to-slate-800',
-  'from-zinc-600 to-zinc-800',
-  'from-stone-500 to-stone-700',
-  'from-slate-500 to-slate-700',
+  'from-brand-dark to-slate-900',
+  'from-brand-green to-green-900',
+  'from-brand-blue to-blue-900',
   'from-green-800 to-green-950',
-  'from-gray-600 to-gray-800',
-  'from-slate-800 to-zinc-900',
+  'from-slate-800 to-brand-dark',
 ]
 
 export default function CategoriesScroll({ categories }) {
@@ -51,7 +51,7 @@ export default function CategoriesScroll({ categories }) {
           <button
             type="button"
             onClick={scrollLeft}
-            className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-900 hover:text-white transition-all duration-300"
+            className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-brand-blue hover:text-white hover:border-brand-blue transition-all duration-300"
           >
             &#8592;
           </button>
@@ -59,7 +59,7 @@ export default function CategoriesScroll({ categories }) {
           <button
             type="button"
             onClick={scrollRight}
-            className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-900 hover:text-white transition-all duration-300"
+            className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-brand-green hover:text-white hover:border-brand-green transition-all duration-300"
           >
             &#8594;
           </button>

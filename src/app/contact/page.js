@@ -5,7 +5,7 @@ import { Mail, Phone, MapPin, Send } from 'lucide-react'
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-white via-zinc-50/50 to-zinc-100/30 pt-32 pb-24">
+    <main className="min-h-screen bg-gradient-to-b from-white via-brand-green/[0.02] to-brand-blue/[0.04] pt-32 pb-24">
       <div className="max-w-6xl mx-auto px-8 md:px-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

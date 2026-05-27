@@ -36,7 +36,7 @@ export default function Navbar() {
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
       scrolled
-        ? 'bg-white/80 backdrop-blur-2xl border-b border-brand-green/30 shadow-xl shadow-brand-green/5'
+        ? 'bg-white/90 backdrop-blur-2xl border-b border-brand-green/40 shadow-xl shadow-brand-green/10'
         : 'bg-gradient-to-b from-black/50 via-black/30 to-transparent'
     }`}>
       <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 md:px-8 py-4 gap-4">
@@ -56,7 +56,7 @@ export default function Navbar() {
           <SearchBar scrolled={scrolled} />
           <Link
             href="/contact"
-            className="px-5 py-2 bg-brand-blue text-white text-sm font-semibold hover:bg-brand-dark transition-colors duration-300 rounded-lg"
+            className="px-5 py-2 bg-brand-blue text-white text-sm font-semibold hover:bg-brand-dark transition-colors duration-300 rounded-lg shadow-lg shadow-brand-blue/25"
           >
             Get Quote
           </Link>

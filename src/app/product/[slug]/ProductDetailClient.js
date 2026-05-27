@@ -17,26 +17,33 @@ export default function ProductDetailClient({ product }) {
   const categories = product.productCategories?.nodes || []
 
   return (
-    <main className="min-h-screen relative" style={{ background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 30%, #e8f0fe 60%, #dbeafe 100%)' }}>
-      <div className="absolute inset-0 section-texture pointer-events-none" />
-      {/* Breadcrumb */}
-      <motion.div
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4 }}
-        className="relative z-10 pt-24 pb-4 max-w-7xl mx-auto px-8 md:px-12 lg:px-16"
-      >
-        <nav className="flex items-center gap-2 text-sm text-zinc-500">
-          <Link href="/" className="hover:text-brand-blue transition-colors">Home</Link>
-          <span>/</span>
-          <Link href="/products" className="hover:text-brand-blue transition-colors">Products</Link>
-          <span>/</span>
-          <span className="text-slate-700 font-medium">{product.name}</span>
-        </nav>
-      </motion.div>
+    <main className="min-h-screen relative bg-gradient-to-b from-brand-green/[0.04] via-white to-brand-blue/[0.05]">
+      <div className="absolute inset-0 section-texture pointer-events-none opacity-30" />
+
+      {/* Brand header block */}
+      <div className="relative bg-gradient-to-r from-brand-green/15 via-brand-blue/5 to-transparent">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/50 to-white pointer-events-none" />
+        <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-brand-green via-brand-blue to-brand-dark" />
+        <div className="relative z-10 pt-24 pb-4">
+          <div className="max-w-7xl mx-auto px-8 md:px-12 lg:px-16">
+            <motion.nav
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              className="inline-flex items-center gap-2 text-sm bg-white/80 backdrop-blur-sm px-4 py-2 rounded-lg border border-zinc-200 shadow-sm"
+            >
+              <Link href="/" className="text-zinc-500 hover:text-brand-blue transition-colors">Home</Link>
+              <span className="text-zinc-300">/</span>
+              <Link href="/products" className="text-zinc-500 hover:text-brand-blue transition-colors">Products</Link>
+              <span className="text-zinc-300">/</span>
+              <span className="text-brand-green font-medium">{product.name}</span>
+            </motion.nav>
+          </div>
+        </div>
+      </div>
 
       {/* Product Hero */}
-      <section className="relative z-10 max-w-7xl mx-auto px-8 md:px-12 lg:px-16 pb-20">
+      <section className="relative z-10 max-w-7xl mx-auto px-8 md:px-12 lg:px-16 pb-20 -mt-2">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
           {/* Image */}
           <motion.div
@@ -45,7 +52,10 @@ export default function ProductDetailClient({ product }) {
             transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
             className="relative lg:sticky lg:top-28 lg:self-start"
           >
-            <div className="relative aspect-square rounded-2xl overflow-hidden bg-slate-100 group shadow-sm">
+            {/* Decorative brand elements behind the image */}
+            <div className="absolute -top-4 -right-4 w-48 h-48 bg-brand-blue/10 rounded-full blur-2xl pointer-events-none" />
+            <div className="absolute -bottom-4 -left-4 w-40 h-40 bg-brand-green/10 rounded-full blur-2xl pointer-events-none" />
+            <div className="relative aspect-square rounded-2xl overflow-hidden bg-slate-100 group shadow-sm ring-1 ring-black/5">
               {product.image?.sourceUrl ? (
                 <Image
                   src={product.image.sourceUrl}
@@ -95,11 +105,11 @@ export default function ProductDetailClient({ product }) {
             <div className="mb-8">
               {price ? (
                 <div className="flex items-baseline gap-3">
-                  <span className="text-3xl font-bold text-slate-900">₹{price}</span>
+                  <span className="text-3xl font-bold text-brand-green">₹{price}</span>
                   <span className="text-sm text-zinc-500">per unit</span>
                 </div>
               ) : (
-                <span className="text-lg text-zinc-500 font-medium">Price on request</span>
+                <span className="text-lg text-brand-green font-medium">Price on request</span>
               )}
             </div>
 
@@ -122,7 +132,7 @@ export default function ProductDetailClient({ product }) {
               </Link>
               <Link
                 href="/products"
-                className="inline-flex items-center gap-2 px-8 py-3.5 border-2 border-zinc-300 text-slate-700 font-semibold text-sm uppercase tracking-wider hover:border-slate-900 hover:text-slate-900 transition-all duration-300 rounded-lg"
+                className="inline-flex items-center gap-2 px-8 py-3.5 border-2 border-brand-blue/30 text-brand-blue font-semibold text-sm uppercase tracking-wider hover:bg-brand-blue hover:text-white transition-all duration-300 rounded-lg"
               >
                 ← All Products
               </Link>
@@ -138,10 +148,10 @@ export default function ProductDetailClient({ product }) {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: 0.4 + i * 0.08 }}
-                    className="flex items-center gap-3 px-4 py-3 bg-white rounded-xl border border-zinc-200/70"
+                    className="flex items-center gap-3 px-4 py-3 bg-white rounded-xl border border-brand-green/10 hover:border-brand-green/30 hover:shadow-md hover:shadow-brand-green/5 transition-all duration-300"
                   >
-                    <div className="w-8 h-8 rounded-lg bg-brand-blue/10 flex items-center justify-center shrink-0">
-                      <Icon className="w-4 h-4 text-brand-blue" />
+                    <div className="w-8 h-8 rounded-lg bg-brand-green/10 flex items-center justify-center shrink-0">
+                      <Icon className="w-4 h-4 text-brand-green" />
                     </div>
                     <span className="text-sm font-medium text-slate-700">{badge.label}</span>
                   </motion.div>
@@ -160,7 +170,7 @@ export default function ProductDetailClient({ product }) {
             transition={{ duration: 0.6 }}
             className="mt-20 pt-12 border-t border-zinc-200"
           >
-            <div className="max-w-4xl">
+            <div className="max-w-4xl border-l-4 border-brand-green/30 pl-6">
               <h2 className="text-2xl font-bold text-slate-900 mb-2">Specifications</h2>
               <div className="w-16 h-1 bg-brand-green mb-8" />
               <div
