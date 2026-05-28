@@ -51,7 +51,7 @@ export default function CategoriesScroll({ categories }) {
           <button
             type="button"
             onClick={scrollLeft}
-            className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-brand-blue hover:text-white hover:border-brand-blue transition-all duration-300"
+            className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-brand-green hover:text-white hover:border-brand-green transition-all duration-300"
           >
             &#8592;
           </button>
@@ -98,3 +98,5 @@ export default function CategoriesScroll({ categories }) {
     </>
   )
 }
+
+

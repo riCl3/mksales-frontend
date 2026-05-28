@@ -49,13 +49,13 @@ export default function WhyChooseUs() {
   return (
     <section className="relative overflow-hidden py-24 bg-gradient-to-br from-brand-dark via-slate-900 to-brand-dark">
       <div className="absolute inset-0 section-texture pointer-events-none opacity-20" />
-      <div className="absolute inset-0 bg-gradient-to-t from-brand-green/20 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-brand-blue/20 to-transparent pointer-events-none" />
       <div className="absolute inset-0 opacity-[0.08]" style={{
-        backgroundImage: `radial-gradient(circle at 10px 10px, rgba(0,143,55,0.3) 1px, transparent 1px)`,
+        backgroundImage: `radial-gradient(circle at 10px 10px, rgba(0,124,189,0.3) 1px, transparent 1px)`,
         backgroundSize: '25px 25px'
       }} />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -70,7 +70,7 @@ export default function WhyChooseUs() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((feature, index) => {
             const Icon = feature.icon
             const isExpanded = expanded === index
@@ -124,3 +124,6 @@ export default function WhyChooseUs() {
     </section>
   )
 }
+
+
+

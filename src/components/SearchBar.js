@@ -56,7 +56,6 @@ export default function SearchBar({ scrolled }) {
     }
   }, [open])
 
-  // Close on click outside
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
@@ -67,7 +66,6 @@ export default function SearchBar({ scrolled }) {
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
-  // Close on Escape
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') setOpen(false)
@@ -114,12 +112,11 @@ export default function SearchBar({ scrolled }) {
 
   return (
     <div ref={wrapperRef} className="relative">
-      {/* Search trigger button */}
       <button
         onClick={() => setOpen(!open)}
         className={`p-2 rounded-lg transition-all duration-300 ${
           scrolled
-            ? 'text-gray-600 hover:text-brand-green hover:bg-brand-green/5'
+            ? 'text-gray-600 dark:text-zinc-300 hover:text-brand-blue hover:bg-brand-blue/5 dark:hover:bg-brand-blue/10'
             : 'text-white/80 hover:text-white hover:bg-white/10'
         }`}
         aria-label="Search"
@@ -127,14 +124,8 @@ export default function SearchBar({ scrolled }) {
         {open ? <X className="w-5 h-5" /> : <Search className="w-5 h-5" />}
       </button>
 
-      {/* Search dropdown */}
       {open && (
-        <div className={`absolute right-0 top-full mt-3 w-[380px] rounded-2xl overflow-hidden shadow-2xl border z-50 ${
-          scrolled
-            ? 'bg-white border-zinc-200'
-            : 'bg-white border-zinc-200'
-        }`}>
-          {/* Input */}
+        <div className="absolute right-0 top-full mt-3 w-[380px] rounded-2xl overflow-hidden shadow-2xl border z-50 bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700">
           <form onSubmit={handleSubmit} className="relative">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
             <input
@@ -143,20 +134,19 @@ export default function SearchBar({ scrolled }) {
               value={query}
               onChange={handleInputChange}
               placeholder="Search products..."
-              className="w-full pl-11 pr-4 py-4 text-sm text-slate-900 placeholder-zinc-400 outline-none border-b border-zinc-100"
+              className="w-full pl-11 pr-4 py-4 text-sm text-slate-900 dark:text-zinc-100 placeholder-zinc-400 dark:placeholder-zinc-500 outline-none border-b border-zinc-100 dark:border-zinc-700 bg-transparent"
             />
           </form>
 
-          {/* Results */}
           <div className="max-h-80 overflow-y-auto">
             {loading && (
               <div className="px-4 py-6 text-center">
-                <div className="inline-block w-5 h-5 border-2 border-brand-green/30 border-t-brand-green rounded-full animate-spin" />
+                <div className="inline-block w-5 h-5 border-2 border-brand-blue/30 border-t-brand-blue rounded-full animate-spin" />
               </div>
             )}
 
             {!loading && query.length >= 2 && results.length === 0 && (
-              <div className="px-4 py-6 text-center text-sm text-zinc-500">
+              <div className="px-4 py-6 text-center text-sm text-zinc-500 dark:text-zinc-400">
                 No products found for &ldquo;{query}&rdquo;
               </div>
             )}
@@ -166,9 +156,9 @@ export default function SearchBar({ scrolled }) {
                 key={product.slug}
                 href={`/product/${product.slug}`}
                 onClick={close}
-                className="flex items-center gap-3 px-4 py-3 hover:bg-zinc-50 transition-colors group"
+                className="flex items-center gap-3 px-4 py-3 hover:bg-zinc-50 dark:hover:bg-zinc-700/50 transition-colors group"
               >
-                <div className="w-12 h-12 rounded-lg overflow-hidden bg-slate-100 shrink-0">
+                <div className="w-12 h-12 rounded-lg overflow-hidden bg-slate-100 dark:bg-zinc-700 shrink-0">
                   {product.image?.sourceUrl ? (
                     <Image
                       src={product.image.sourceUrl}
@@ -178,31 +168,30 @@ export default function SearchBar({ scrolled }) {
                       className="w-full h-full object-cover"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200">
-                      <span className="text-sm font-bold text-slate-300">{product.name?.charAt(0)}</span>
+                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 dark:from-zinc-700 dark:to-zinc-600">
+                      <span className="text-sm font-bold text-slate-300 dark:text-zinc-500">{product.name?.charAt(0)}</span>
                     </div>
                   )}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-slate-800 truncate group-hover:text-brand-green transition-colors">
+                  <p className="text-sm font-medium text-slate-800 dark:text-zinc-100 truncate group-hover:text-brand-blue transition-colors">
                     {product.name}
                   </p>
                   {(product.price || product.regularPrice) && (
-                    <p className="text-xs text-zinc-500 mt-0.5">
-                      ₹{product.price || product.regularPrice}
+                    <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">
+                      &#8377;{product.price || product.regularPrice}
                     </p>
                   )}
                 </div>
-                <ArrowRight className="w-4 h-4 text-zinc-300 group-hover:text-brand-green transition-colors shrink-0" />
+                <ArrowRight className="w-4 h-4 text-zinc-300 dark:text-zinc-600 group-hover:text-brand-green transition-colors shrink-0" />
               </Link>
             ))}
           </div>
 
-          {/* View all link */}
           {query.length >= 2 && !loading && (
             <button
               onClick={handleSubmit}
-              className="w-full px-4 py-3 text-sm font-medium text-brand-green hover:bg-brand-green/5 transition-colors border-t border-zinc-100 flex items-center justify-center gap-1.5"
+              className="w-full px-4 py-3 text-sm font-medium text-brand-blue hover:bg-brand-blue/5 dark:hover:bg-brand-blue/10 transition-colors border-t border-zinc-100 dark:border-zinc-700 flex items-center justify-center gap-1.5"
             >
               View all results for &ldquo;{query}&rdquo;
               <ArrowRight className="w-3.5 h-3.5" />
@@ -213,3 +202,5 @@ export default function SearchBar({ scrolled }) {
     </div>
   )
 }
+
+
