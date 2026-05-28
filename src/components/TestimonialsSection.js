@@ -86,18 +86,19 @@ export default function TestimonialsSection() {
   const t = testimonials[current]
 
   return (
-    <section ref={sectionRef} className="py-28 bg-gradient-to-br from-slate-900 via-slate-800 to-brand-dark relative overflow-hidden">
+    <section ref={sectionRef} className="py-24 md:py-32 bg-gradient-to-br from-slate-900 via-slate-800 to-brand-dark relative overflow-hidden">
       {/* Subtle pattern overlay */}
       <div className="absolute inset-0 opacity-[0.08]" style={{
         backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 1px)`,
         backgroundSize: '30px 30px'
       }} />
-      <div className="absolute inset-0 bg-gradient-to-br from-brand-green/10 via-transparent to-transparent pointer-events-none" />
+      <div className="absolute inset-0 section-texture pointer-events-none opacity-20" />
+      <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/10 via-transparent to-transparent pointer-events-none" />
 
       {/* Decorative glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-green/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-blue/5 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="relative z-10 max-w-4xl mx-auto px-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -148,7 +149,7 @@ export default function TestimonialsSection() {
 
               {/* Author */}
               <div className="flex items-center gap-4 pt-6 border-t border-white/10">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-brand-green to-blue-400 flex items-center justify-center text-white font-bold text-sm shrink-0">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-brand-blue to-green-400 flex items-center justify-center text-white font-bold text-sm shrink-0">
                   {t.name.split(' ').map(n => n[0]).join('')}
                 </div>
                 <div>
@@ -192,3 +193,6 @@ export default function TestimonialsSection() {
     </section>
   )
 }
+
+
+

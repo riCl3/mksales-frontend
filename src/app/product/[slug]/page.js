@@ -54,11 +54,15 @@ export default async function ProductPage({ params }) {
 
   if (!product) {
     return (
-      <main className="min-h-screen bg-white flex items-center justify-center">
+      <main className="min-h-screen bg-white dark:bg-zinc-900 flex items-center justify-center transition-colors duration-300">
         <div className="text-center px-6">
-          <h1 className="text-4xl font-bold text-slate-900 mb-4">Product Not Found</h1>
-          <Link href="/products" className="text-brand-green font-semibold hover:underline">
-            ← Back to Products
+          <h1 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">Product Not Found</h1>
+          <p className="text-zinc-500 dark:text-zinc-400 mb-6">The product you&apos;re looking for doesn&apos;t exist or has been removed.</p>
+          <Link
+            href="/products"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-brand-green text-white font-semibold rounded-lg hover:bg-brand-dark transition-colors duration-300"
+          >
+            Back to Products
           </Link>
         </div>
       </main>

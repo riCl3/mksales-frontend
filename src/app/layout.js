@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { ThemeProvider } from "../components/ThemeProvider";
 import "./globals.css";
 
 const inter = Inter({
@@ -10,16 +11,19 @@ const inter = Inter({
 
 export const metadata = {
   title: "MK SALES - Construction Materials",
-  description: "Premium construction materials for industrial projects",
+  description:
+    "Premium construction materials for industrial projects across India.",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="min-h-screen flex flex-col text-zinc-900 antialiased">
-        <Navbar />
-        {children}
-        <Footer />
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
+      <body className="min-h-screen flex flex-col antialiased">
+        <ThemeProvider>
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

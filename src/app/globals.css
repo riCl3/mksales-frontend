@@ -7,71 +7,136 @@
     font-family: var(--font-inter), Inter, Helvetica Neue, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
   }
 
   body {
-    @apply text-zinc-900;
-    background: linear-gradient(180deg, #ffffff 0%, #f0f6fc 40%, #e8f0fe 100%);
+    @apply text-brand-darkBlue bg-white transition-colors duration-300;
+    background: linear-gradient(180deg, #FFFFFF 0%, #F0F5FA 50%, #E2EBF3 100%);
+  }
+
+  .dark body,
+  body.dark {
+    @apply text-white;
+    background: linear-gradient(180deg, #020C14 0%, #051A2A 50%, #082638 100%);
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-semibold tracking-tight;
   }
 
-  h1 {
-    @apply text-display-2xl;
-  }
-
-  h2 {
-    @apply text-display-xl;
-  }
-
-  h3 {
-    @apply text-display-lg;
-  }
-
-  h4 {
-    @apply text-display-md;
-  }
+  h1 { @apply text-display-2xl; }
+  h2 { @apply text-display-xl; }
+  h3 { @apply text-display-lg; }
+  h4 { @apply text-display-md; }
 
   p {
-    @apply leading-relaxed text-lg text-zinc-600;
+    @apply leading-relaxed text-lg text-zinc-600 dark:text-zinc-400 transition-colors duration-300;
   }
 
   a {
-    @apply transition-colors duration-300 ease-in-out-smooth;
+    @apply transition-all duration-300;
+  }
+
+  ::selection { @apply bg-brand-blue/20 text-brand-dark; }
+
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand-blue;
   }
 }
 
 @layer components {
   .btn {
-    @apply inline-flex items-center justify-center px-6 py-3 
+    @apply inline-flex items-center justify-center px-6 py-3
            font-medium text-sm uppercase tracking-wider
-           transition-all duration-300 ease-in-out-smooth
-           focus:outline-none focus:ring-2 focus:ring-offset-2;
+           transition-all duration-300
+           focus:outline-none focus:ring-2 focus:ring-offset-2
+           disabled:opacity-50 disabled:cursor-not-allowed;
   }
 
   .btn-primary {
-    @apply btn bg-brand-blue text-white hover:bg-brand-dark focus:ring-brand-blue;
+    @apply btn bg-brand-green text-white
+           hover:bg-brand-dark hover:shadow-lg hover:shadow-brand-green/20
+           focus:ring-brand-green
+           dark:bg-brand-green dark:hover:bg-brand-dark dark:hover:shadow-brand-green/45;
   }
 
   .btn-secondary {
-    @apply btn border-2 border-zinc-900 text-zinc-900 hover:bg-zinc-900 hover:text-white focus:ring-zinc-900;
+    @apply btn border-2 border-brand-blue text-brand-blue
+           hover:bg-brand-blue hover:text-white
+           focus:ring-brand-blue
+           dark:border-brand-blue dark:text-brand-blue
+           dark:hover:bg-brand-blue dark:hover:text-white;
   }
 
   .btn-ghost {
-    @apply btn text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100;
+    @apply btn text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100
+           dark:text-zinc-400 dark:hover:text-zinc-100 dark:hover:bg-zinc-800;
   }
 
   .link {
-    @apply text-brand-blue hover:text-brand-dark underline-offset-4 hover:underline 
-           transition-colors duration-300 ease-in-out-smooth;
+    @apply text-brand-blue hover:text-brand-dark underline-offset-4 hover:underline
+           transition-colors duration-300
+           dark:text-blue-400 dark:hover:text-blue-300;
+  }
+
+  .card {
+    @apply bg-white dark:bg-zinc-800/90 border border-zinc-200/70 dark:border-zinc-700/50
+           rounded-xl shadow-sm
+           transition-all duration-300;
+  }
+
+  .card-hover {
+    @apply card hover:border-brand-blue/30 hover:shadow-xl hover:shadow-brand-blue/5
+           dark:hover:border-brand-blue/40 dark:hover:shadow-brand-blue/10;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2.5 py-1 text-[10px] font-semibold
+           uppercase tracking-wider rounded-full;
+  }
+
+  .badge-green { @apply badge bg-brand-blue/90 text-white backdrop-blur-sm;
+  }
+
+  .section-accent { @apply w-12 h-1 bg-brand-blue rounded-full; }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-green to-brand-blue;
+  }
+
+  .glass {
+    @apply bg-white/70 dark:bg-zinc-900/70 backdrop-blur-2xl
+           border border-white/20 dark:border-zinc-700/30 shadow-xl;
   }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-zinc-300 dark:bg-zinc-600 rounded-full;
   }
 
   .section-texture {
@@ -82,7 +147,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background-image: 
+    background-image:
       repeating-linear-gradient(
         90deg,
         transparent,
@@ -111,13 +176,108 @@
     pointer-events: none;
   }
 
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
+  .dark .section-texture::before {
+    background-image:
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 255, 255, 0.03) 2px,
+        rgba(255, 255, 255, 0.03) 4px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 255, 255, 0.03) 2px,
+        rgba(255, 255, 255, 0.03) 4px
+      ),
+      radial-gradient(
+        ellipse 2px 2px at 20px 30px,
+        rgba(255, 255, 255, 0.05),
+        transparent
+      ),
+      radial-gradient(
+        ellipse 1px 1px at 40px 70px,
+        rgba(255, 255, 255, 0.04),
+        transparent
+      );
   }
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
   }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.08) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s ease-in-out infinite;
+  }
+
+  .animate-glow {
+    animation: glowPulse 3s ease-in-out infinite;
+  }
+
+  .image-shine {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .image-shine::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 40%,
+      rgba(255, 255, 255, 0.15) 45%,
+      rgba(255, 255, 255, 0.15) 50%,
+      transparent 55%
+    );
+    background-size: 250% 250%;
+    animation: shimmer 3s ease-in-out infinite;
+    pointer-events: none;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-10px) scale(1.02); }
 }
 
 /* TrustSection CSS-only animated orbs */
@@ -127,6 +287,7 @@
   pointer-events: none;
   will-change: transform;
 }
+
 .trust-orb-1 {
   width: 400px;
   height: 400px;
@@ -135,6 +296,7 @@
   background: radial-gradient(circle, rgba(0,124,189,0.25) 0%, transparent 70%);
   animation: orbFloat1 12s ease-in-out infinite;
 }
+
 .trust-orb-2 {
   width: 350px;
   height: 350px;
@@ -143,6 +305,7 @@
   background: radial-gradient(circle, rgba(0,143,55,0.20) 0%, transparent 70%);
   animation: orbFloat2 14s ease-in-out infinite;
 }
+
 .trust-orb-3 {
   width: 250px;
   height: 250px;
@@ -156,11 +319,15 @@
   0%, 100% { transform: translate(0, 0) scale(1); }
   50% { transform: translate(30px, -20px) scale(1.1); }
 }
+
 @keyframes orbFloat2 {
   0%, 100% { transform: translate(0, 0) scale(1); }
   50% { transform: translate(-20px, 15px) scale(1.05); }
 }
+
 @keyframes orbFloat3 {
   0%, 100% { transform: translate(0, 0) scale(1); }
   50% { transform: translate(15px, -25px) scale(1.08); }
 }
+
+
