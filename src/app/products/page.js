@@ -103,7 +103,7 @@ export default async function ProductsPage() {
 
       <div className="relative z-10 pb-24">
         <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
-          <Suspense fallback={<div className="h-96 animate-pulse bg-white/60 dark:bg-white/5 rounded-xl" />}>
+          <Suspense fallback={<div className="h-96 animate-pulse bg-white/10 rounded-xl" />}>
             <ProductGrid products={products} categories={categories} />
           </Suspense>
         </div>

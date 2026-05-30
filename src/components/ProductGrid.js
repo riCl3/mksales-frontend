@@ -20,10 +20,13 @@ function ProductCard({ product, index }) {
       transition={{ duration: 0.4, delay: index * 0.05, ease: [0.4, 0, 0.2, 1] }}
     >
       <div className="group h-full">
-        <div className="relative h-full bg-white dark:bg-[#0A1F30] rounded-2xl border border-[#C7C7C7]/50 dark:border-[#1A3A50] overflow-hidden shadow-sm hover:shadow-xl hover:shadow-brand-blue/10 dark:hover:shadow-brand-blue/5 hover:border-brand-blue/50 dark:hover:border-brand-blue/30 transition-all duration-500">
-          <Link href={`/product/${product.slug}`} className="block">
-            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-green via-brand-blue to-brand-darkBlue scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-10" />
-            <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-[#F0F5FA] to-[#E2EBF3] dark:from-[#0A1F30] dark:to-[#0E2940]">
+        <div className="relative h-full rounded-2xl overflow-hidden border border-white/20 dark:border-white/10 shadow-sm hover:shadow-xl hover:shadow-brand-blue/20 transition-all duration-500 backdrop-blur-xl bg-white/60 dark:bg-white/[0.07]">
+          <div className="absolute inset-0 bg-gradient-to-br from-white/80 via-white/40 to-white/20 dark:from-white/[0.12] dark:via-white/[0.05] dark:to-transparent pointer-events-none" />
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/60 dark:via-white/20 to-transparent pointer-events-none" />
+          <div className="relative">
+            <Link href={`/product/${product.slug}`} className="block">
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-green via-brand-blue to-brand-green scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-10" />
+              <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-[#C7C7C7]/60 to-[#C7C7C7]/30 dark:from-[#014565]/60 dark:to-[#014565]/30">
               {image ? (
                 <Image
                   src={image}
@@ -34,7 +37,7 @@ function ProductCard({ product, index }) {
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center">
-                  <span className="text-5xl font-bold text-brand-blue/15 dark:text-brand-blue/25">{name.charAt(0)}</span>
+                  <span className="text-5xl font-bold text-[#014565]/30 dark:text-white/20">{name.charAt(0)}</span>
                 </div>
               )}
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -42,23 +45,25 @@ function ProductCard({ product, index }) {
 
             </div>
 
-            <div className="p-5">
-              <h3 className="text-sm font-semibold text-brand-darkBlue dark:text-white group-hover:text-brand-blue dark:group-hover:text-brand-blue transition-colors duration-300 mb-4 line-clamp-2 leading-snug">
+            <div className="px-4 py-3">
+              <h3 className="text-sm font-semibold text-[#014565] dark:text-white group-hover:text-brand-green transition-colors duration-300 mb-3 line-clamp-2 leading-snug">
                 {name}
               </h3>
             </div>
           </Link>
 
-          <div className="px-5 pb-5 flex gap-3">
+          </div>
+
+          <div className="px-4 pb-4 flex gap-3">
             <Link
               href={`/contact?product=${product.slug}`}
-              className="flex-1 min-w-0 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-brand-green text-white text-xs font-semibold rounded-lg shadow-sm shadow-brand-green/20 hover:bg-brand-dark hover:shadow-brand-green/45 transition-all duration-300 whitespace-nowrap"
+              className="flex-1 min-w-0 inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-brand-green text-white text-xs font-semibold rounded-lg hover:bg-brand-green/70 transition-all duration-300 whitespace-nowrap"
             >
               Request Price
             </Link>
             <Link
               href={`/product/${product.slug}`}
-              className="flex-1 min-w-0 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 border-2 border-brand-blue text-brand-blue text-xs font-semibold rounded-lg hover:bg-brand-blue hover:text-white transition-all duration-300 whitespace-nowrap"
+              className="flex-1 min-w-0 inline-flex items-center justify-center gap-1.5 px-4 py-2 border-2 border-[#014565]/30 dark:border-white/30 text-[#014565] dark:text-white text-xs font-semibold rounded-lg hover:bg-[#014565]/10 dark:hover:bg-white/10 transition-all duration-300 whitespace-nowrap"
             >
               View
               <svg className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -101,15 +106,17 @@ export default function ProductGrid({ products = [], categories = [] }) {
   return (
     <div>
       {categories.length > 0 && (
-        <div className="mb-10 p-4 bg-white dark:bg-[#0A1F30] backdrop-blur-sm rounded-2xl border border-[#C7C7C7]/50 dark:border-[#1A3A50] shadow-sm">
-          <div className="flex flex-wrap gap-2">
+        <div className="relative mb-10 p-4 rounded-2xl overflow-hidden border border-white/20 dark:border-white/10 shadow-sm backdrop-blur-xl bg-brand-blue/20 dark:bg-brand-blue/[0.15]">
+          <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/30 via-brand-blue/10 to-transparent dark:from-brand-blue/[0.2] dark:via-brand-blue/[0.08] dark:to-transparent pointer-events-none" />
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/50 dark:via-white/20 to-transparent pointer-events-none" />
+          <div className="relative z-10 flex flex-wrap gap-2">
             <button
               type="button"
               onClick={() => setActiveCategory('all')}
               className={`px-4 py-2 text-sm font-medium rounded-full border transition-all duration-300 ${
                 activeCategory === 'all'
-                  ? 'bg-brand-blue text-white border-brand-blue shadow-md shadow-brand-blue/20'
-                  : 'bg-white dark:bg-[#0A1F30] text-brand-darkBlue dark:text-zinc-300 border-[#C7C7C7]/50 dark:border-[#1A3A50] hover:border-brand-blue/40 hover:text-brand-blue'
+                  ? 'bg-brand-blue text-white border-brand-blue shadow-md'
+                  : 'bg-white/80 dark:bg-white/10 text-[#014565] dark:text-white border-white/40 dark:border-white/25 hover:border-brand-blue hover:text-brand-blue'
               }`}
             >
               All Products
@@ -121,8 +128,8 @@ export default function ProductGrid({ products = [], categories = [] }) {
                 onClick={() => setActiveCategory(cat.slug)}
                 className={`px-4 py-2 text-sm font-medium rounded-full border transition-all duration-300 ${
                   activeCategory === cat.slug
-                    ? 'bg-brand-blue text-white border-brand-blue shadow-md shadow-brand-blue/20'
-                    : 'bg-white dark:bg-[#0A1F30] text-brand-darkBlue dark:text-zinc-300 border-[#C7C7C7]/50 dark:border-[#1A3A50] hover:border-brand-blue/40 hover:text-brand-blue'
+                    ? 'bg-brand-blue text-white border-brand-blue shadow-md'
+                    : 'bg-white/80 dark:bg-white/10 text-[#014565] dark:text-white border-white/40 dark:border-white/25 hover:border-brand-blue hover:text-brand-blue'
                 }`}
               >
                 {cat.name}
@@ -133,9 +140,9 @@ export default function ProductGrid({ products = [], categories = [] }) {
       )}
 
       <div className="mb-6 flex items-center gap-3">
-        <span className="inline-block w-1 h-4 bg-brand-blue rounded-full" />
-        <p className="text-sm text-zinc-500 dark:text-zinc-400">
-          Showing <span className="font-semibold text-brand-blue">{filteredProducts.length}</span> {filteredProducts.length === 1 ? 'product' : 'products'}
+        <span className="inline-block w-1 h-4 bg-white rounded-full" />
+        <p className="text-sm text-white/60">
+          Showing <span className="font-semibold text-white">{filteredProducts.length}</span> {filteredProducts.length === 1 ? 'product' : 'products'}
         </p>
       </div>
 
@@ -151,18 +158,18 @@ export default function ProductGrid({ products = [], categories = [] }) {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="text-center py-20 bg-white dark:bg-[#0A1F30] backdrop-blur-sm rounded-2xl border border-[#C7C7C7]/50 dark:border-[#1A3A50] shadow-sm"
+          className="text-center py-20 bg-[#014565] backdrop-blur-sm rounded-2xl border border-white/10 shadow-sm"
         >
-          <div className="w-16 h-16 bg-brand-blue/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-            <svg className="w-8 h-8 text-brand-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <svg className="w-8 h-8 text-white/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0l-3-3m3 3l3-3M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
             </svg>
           </div>
-          <p className="text-zinc-600 dark:text-zinc-300 font-medium mb-2">No products in this category.</p>
+          <p className="text-white/80 font-medium mb-2">No products in this category.</p>
           <button
             type="button"
             onClick={() => setActiveCategory('all')}
-            className="inline-flex items-center gap-1.5 px-5 py-2 bg-brand-blue text-white text-sm font-medium rounded-lg hover:bg-brand-darkBlue transition-colors duration-300 shadow-sm shadow-brand-blue/20"
+            className="inline-flex items-center gap-1.5 px-5 py-2 bg-white text-[#014565] text-sm font-medium rounded-lg hover:bg-brand-green hover:text-white transition-colors duration-300 shadow-sm"
           >
             View all products
           </button>
