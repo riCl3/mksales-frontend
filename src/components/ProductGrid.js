@@ -39,13 +39,7 @@ function ProductCard({ product, index }) {
               )}
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-              {categories.length > 0 && (
-                <div className="absolute top-3 left-3">
-                  <span className="inline-block px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white bg-brand-blue/90 backdrop-blur-sm rounded-full shadow-sm">
-                    {categories[0].name}
-                  </span>
-                </div>
-              )}
+
             </div>
 
             <div className="p-5">

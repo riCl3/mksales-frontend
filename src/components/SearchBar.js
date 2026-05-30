@@ -40,7 +40,7 @@ async function searchProducts(query) {
   }
 }
 
-export default function SearchBar({ scrolled }) {
+export default function SearchBar({ scrolled, isHome = true }) {
   const [open, setOpen] = useState(false)
   const [query, setQuery] = useState('')
   const [results, setResults] = useState([])
@@ -115,9 +115,11 @@ export default function SearchBar({ scrolled }) {
       <button
         onClick={() => setOpen(!open)}
         className={`p-2 rounded-lg transition-all duration-300 ${
-          scrolled
-            ? 'text-gray-600 dark:text-zinc-300 hover:text-brand-blue hover:bg-brand-blue/5 dark:hover:bg-brand-blue/10'
-            : 'text-white/80 hover:text-white hover:bg-white/10'
+          !isHome
+            ? 'text-white hover:text-white/80 hover:bg-white/10'
+            : scrolled
+              ? 'text-gray-600 dark:text-zinc-300 hover:text-brand-blue hover:bg-brand-blue/5 dark:hover:bg-brand-blue/10'
+              : 'text-white/80 hover:text-white hover:bg-white/10'
         }`}
         aria-label="Search"
       >
