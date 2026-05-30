@@ -2,13 +2,16 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Menu, X } from 'lucide-react'
 import SearchBar from './SearchBar'
 import ThemeToggle from './ThemeToggle'
+import { useTheme } from './ThemeProvider'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const { theme, mounted } = useTheme()
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)
@@ -43,10 +46,13 @@ export default function Navbar() {
       <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 md:px-8 py-4 gap-4">
         <Link
           href="/"
-          className="text-2xl font-bold tracking-wide transition-colors duration-300 shrink-0"
+          className="shrink-0"
         >
-          <span className={scrolled ? 'text-brand-blue dark:text-blue-400' : 'text-white'}>MK</span>
-          <span className={`${scrolled ? 'text-gray-800 dark:text-zinc-100' : 'text-brand-blue'} ml-1`}>Sales</span>
+          {mounted && scrolled && theme === 'light' ? (
+            <Image src="/logo-dark.svg" alt="MK Sales" width={140} height={56} priority />
+          ) : (
+            <Image src="/logo-light.svg" alt="MK Sales" width={140} height={56} priority />
+          )}
         </Link>
 
         <div className="hidden md:flex items-center gap-6 shrink-0">
