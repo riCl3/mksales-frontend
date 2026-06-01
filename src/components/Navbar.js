@@ -68,7 +68,7 @@ export default function Navbar() {
 
         <div className="hidden md:flex items-center gap-6 shrink-0">
           <Link href="/" className={linkClass()}>Home</Link>
-          <button onClick={() => scrollToSection('categories')} className={linkClass()}>Categories</button>
+          <button onClick={() => { if (isHome) { scrollToSection('categories'); } else { window.location.href = '/#categories'; } }} className={linkClass()}>Categories</button>
           <Link href="/products" className={linkClass()}>Products</Link>
           <Link href="/contact" className={linkClass()}>Contact</Link>
           <div className={`flex items-center gap-1 pl-4 border-l ${!isHome ? 'border-white/30' : 'border-zinc-300 dark:border-zinc-600'}`}>
@@ -93,6 +93,7 @@ export default function Navbar() {
             onClick={() => setMenuOpen(!menuOpen)}
             className="relative z-50 p-2"
             aria-label="Toggle menu"
+            aria-expanded={menuOpen}
           >
             {menuOpen ? (
               <X className="w-6 h-6 text-white" />
@@ -107,7 +108,7 @@ export default function Navbar() {
         <div className="fixed inset-0 z-40 bg-slate-900/98 backdrop-blur-2xl" style={{ overscrollBehavior: 'contain' }}>
           <div className="flex flex-col items-center justify-center h-full gap-10">
             <Link href="/" onClick={() => setMenuOpen(false)} className="text-white text-lg font-bold uppercase tracking-widest hover:text-brand-green transition-colors">Home</Link>
-            <button onClick={() => scrollToSection('categories')} className="text-white text-lg font-bold uppercase tracking-widest hover:text-brand-green transition-colors">Categories</button>
+            <button onClick={() => { if (isHome) { scrollToSection('categories'); } else { window.location.href = '/#categories'; } }} className="text-white text-lg font-bold uppercase tracking-widest hover:text-brand-green transition-colors">Categories</button>
             <Link href="/products" onClick={() => setMenuOpen(false)} className="text-white text-lg font-bold uppercase tracking-widest hover:text-brand-green transition-colors">Products</Link>
             <Link href="/contact" onClick={() => setMenuOpen(false)} className="text-white text-lg font-bold uppercase tracking-widest hover:text-brand-green transition-colors">Contact</Link>
             <div className="flex items-center gap-4 mt-4">

@@ -14,7 +14,7 @@ export default function Hero() {
 
   return (
     <section className="relative h-screen w-full overflow-hidden" aria-label="Hero banner">
-      <video autoPlay muted loop playsInline className="absolute inset-0 h-full w-full object-cover">
+      <video autoPlay muted loop playsInline poster="/sub-hero-bg.jpg" className="absolute inset-0 h-full w-full object-cover">
         <source src="/hero-video.mp4" type="video/mp4" />
       </video>
 
@@ -30,8 +30,8 @@ export default function Hero() {
           suppressHydrationWarning
           className={`max-w-2xl transition-all duration-1000 ease-out ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
         >
-          <div className="w-12 h-1 bg-brand-green mb-6" />
-          <h1 className="mb-6 text-balance text-display-2xl text-white leading-[1.1]">
+          <div className="w-12 h-1 bg-brand-green mb-6" aria-hidden="true" />
+          <h1 className="mb-6 text-balance text-display-md md:text-display-2xl text-white leading-[1.1]">
             Industrial Grade Materials.
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-blue-300">
               Delivered with Precision.
@@ -61,7 +61,7 @@ export default function Hero() {
       </div>
 
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 animate-fade-in" style={{ animationDelay: '2s', opacity: mounted ? 1 : 0, transition: 'opacity 1s ease-out 2s' }}>
-        <span className="text-zinc-400 text-xs uppercase tracking-widest">Scroll</span>
+        <span className="text-zinc-400 text-xs uppercase tracking-widest" aria-hidden="true">Scroll</span>
         <ArrowDown className="w-4 h-4 text-zinc-400 animate-bounce" aria-hidden="true" />
       </div>
     </section>

@@ -5,8 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Search, X, ArrowRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-
-const GRAPHQL_ENDPOINT = 'https://mksales.co.in/graphql'
+import { GRAPHQL_ENDPOINT } from '../lib/constants'
 
 async function searchProducts(query) {
   if (!query || query.length < 2) return []
@@ -122,12 +121,13 @@ export default function SearchBar({ scrolled, isHome = true }) {
               : 'text-white/80 hover:text-white hover:bg-white/10'
         }`}
         aria-label="Search"
+        aria-expanded={open}
       >
         {open ? <X className="w-5 h-5" /> : <Search className="w-5 h-5" />}
       </button>
 
       {open && (
-        <div className="absolute right-0 top-full mt-3 w-[380px] rounded-2xl overflow-hidden shadow-2xl border z-50 bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700">
+        <div className="absolute right-0 top-full mt-3 w-[min(380px,calc(100vw-2rem))] rounded-2xl overflow-hidden shadow-2xl border z-50 bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700">
           <form onSubmit={handleSubmit} className="relative">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
             <input
@@ -140,9 +140,9 @@ export default function SearchBar({ scrolled, isHome = true }) {
             />
           </form>
 
-          <div className="max-h-80 overflow-y-auto">
+          <div className="max-h-80 overflow-y-auto" role="listbox" aria-live="polite">
             {loading && (
-              <div className="px-4 py-6 text-center">
+              <div className="px-4 py-6 text-center" role="status" aria-label="Loading">
                 <div className="inline-block w-5 h-5 border-2 border-brand-blue/30 border-t-brand-blue rounded-full animate-spin" />
               </div>
             )}

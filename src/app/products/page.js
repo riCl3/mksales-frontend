@@ -1,9 +1,8 @@
 import { Suspense } from 'react';
 import ProductGrid from '../../components/ProductGrid';
+import { GRAPHQL_ENDPOINT } from '../../lib/constants';
 
 export const dynamic = 'force-dynamic';
-
-const GRAPHQL_ENDPOINT = 'https://mksales.co.in/graphql';
 
 async function getProducts() {
   const query = `

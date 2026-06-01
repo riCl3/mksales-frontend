@@ -7,14 +7,12 @@ import Link from 'next/link';
 
 export default function HomePage() {
   return (
-    <main>
+    <>
       <Hero />
 
       <TrustSection />
 
-      <div id="categories">
-        <CategoriesSection />
-      </div>
+      <CategoriesSection />
 
       <WhyChooseUs />
 
@@ -40,7 +38,7 @@ export default function HomePage() {
           </Link>
         </div>
       </section>
-    </main>
+    </>
   );
 }
 

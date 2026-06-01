@@ -3,7 +3,7 @@ import SearchResults from './SearchResults';
 
 export default function SearchResultsPage() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-brand-green/20 via-white to-brand-blue/20 dark:from-brand-green/[0.08] via-brand-darkBlue to-brand-blue/[0.10] py-24 md:py-32 transition-colors duration-300">
+    <div className="min-h-screen bg-gradient-to-b from-brand-green/20 via-white to-brand-blue/20 dark:from-brand-green/[0.08] dark:via-brand-darkBlue dark:to-brand-blue/[0.10] py-24 md:py-32 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
         <div className="mb-10">
           <div className="flex items-center gap-3 mb-4">
@@ -26,7 +26,7 @@ export default function SearchResultsPage() {
           <SearchResults />
         </Suspense>
       </div>
-    </main>
+    </div>
   );
 }
 

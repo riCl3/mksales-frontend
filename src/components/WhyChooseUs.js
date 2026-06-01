@@ -86,6 +86,10 @@ export default function WhyChooseUs() {
               >
                 <div
                   onClick={() => setExpanded(isExpanded ? null : index)}
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setExpanded(isExpanded ? null : index); }}}
+                  role="button"
+                  tabIndex={0}
+                  aria-expanded={isExpanded}
                   className="relative h-full cursor-pointer bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 p-6 hover:border-brand-green/50 hover:shadow-xl hover:shadow-brand-green/10 transition-all duration-300"
                 >
                   <div className="flex items-start justify-between mb-4">
@@ -113,7 +117,7 @@ export default function WhyChooseUs() {
 
                   <div className="mt-3 flex items-center gap-1 text-xs text-zinc-500">
                     <span>{isExpanded ? 'Show less' : 'Click for details'}</span>
-                    <motion.span animate={{ rotate: isExpanded ? 180 : 0 }} transition={{ duration: 0.2 }}>&#8595;</motion.span>
+                    <motion.span aria-hidden="true" animate={{ rotate: isExpanded ? 180 : 0 }} transition={{ duration: 0.2 }}>&#8595;</motion.span>
                   </div>
                 </div>
               </motion.div>
