@@ -2,12 +2,13 @@
 
 import { useState, useEffect } from 'react'
 import CategoriesScroll from './CategoriesScroll'
+import { GRAPHQL_ENDPOINT } from '../lib/constants'
 
 export default function CategoriesSection() {
   const [categories, setCategories] = useState([])
 
   useEffect(() => {
-    fetch('https://mksales.co.in/graphql', {
+    fetch(GRAPHQL_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

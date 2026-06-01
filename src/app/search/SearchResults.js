@@ -6,8 +6,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Search, ArrowRight } from 'lucide-react'
-
-const GRAPHQL_ENDPOINT = 'https://mksales.co.in/graphql'
+import { GRAPHQL_ENDPOINT } from '../../lib/constants'
 
 async function searchProducts(query) {
   if (!query) return []
@@ -122,7 +121,7 @@ export default function SearchResults() {
                 key={product.slug}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.04 }}
+                transition={{ duration: 0.3, delay: Math.min(index, 12) * 0.04 }}
               >
                 <Link href={`/product/${product.slug}`} className="group block h-full">
                   <div className="relative h-full bg-white dark:bg-zinc-800/90 rounded-xl border border-zinc-200/70 dark:border-zinc-700/50 overflow-hidden hover:border-brand-blue/30 dark:hover:border-brand-blue/40 hover:shadow-xl hover:shadow-brand-blue/5 dark:hover:shadow-brand-blue/10 transition-all duration-500">

@@ -1,8 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import ProductDetailClient from './ProductDetailClient';
-
-const GRAPHQL_ENDPOINT = 'https://mksales.co.in/graphql';
+import { GRAPHQL_ENDPOINT } from '../../../lib/constants';
 
 async function getProduct(slug) {
   const productSlug = typeof slug === 'object' ? slug.slug : slug;

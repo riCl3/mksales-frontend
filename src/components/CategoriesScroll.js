@@ -63,7 +63,7 @@ export default function CategoriesScroll({ categories }) {
       <div className="relative z-10 px-6 md:px-8 lg:px-12 py-8">
         <div className="flex gap-6 overflow-hidden">
           {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="flex-shrink-0 w-80 h-72 bg-slate-200 animate-pulse rounded-xl" />
+            <div key={i} className="flex-shrink-0 w-80 h-72 bg-slate-200 dark:bg-zinc-700 animate-pulse rounded-xl" />
           ))}
         </div>
       </div>

@@ -17,7 +17,7 @@ function ProductCard({ product, index }) {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20, scale: 0.95 }}
-      transition={{ duration: 0.4, delay: index * 0.05, ease: [0.4, 0, 0.2, 1] }}
+      transition={{ duration: 0.4, delay: Math.min(index, 12) * 0.05, ease: [0.4, 0, 0.2, 1] }}
     >
       <div className="group h-full">
         <div className="relative h-full rounded-2xl overflow-hidden border border-white/20 dark:border-white/10 shadow-sm hover:shadow-xl hover:shadow-brand-blue/20 transition-all duration-500 backdrop-blur-xl bg-white/60 dark:bg-white/[0.07]">
@@ -142,9 +142,9 @@ export default function ProductGrid({ products = [], categories = [] }) {
       )}
 
       <div className="mb-6 flex items-center gap-3">
-        <span className="inline-block w-1 h-4 bg-white rounded-full" />
-        <p className="text-sm text-white/60">
-          Showing <span className="font-semibold text-white">{filteredProducts.length}</span> {filteredProducts.length === 1 ? 'product' : 'products'}
+        <span className="inline-block w-1 h-4 bg-brand-blue dark:bg-white rounded-full" />
+        <p className="text-sm text-[#014565] dark:text-white/60">
+          Showing <span className="font-semibold text-[#014565] dark:text-white">{filteredProducts.length}</span> {filteredProducts.length === 1 ? 'product' : 'products'}
         </p>
       </div>
 
