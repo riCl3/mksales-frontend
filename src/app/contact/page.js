@@ -47,7 +47,7 @@ export default function ContactPage() {
           >
             {contactInfo.map(({ icon: Icon, label, value }) => (
               <motion.div key={label} variants={fadeInLeft} className="flex items-start gap-4 group">
-                <div className="w-12 h-12 rounded-xl bg-brand-green/10 dark:bg-brand-green/20 flex items-center justify-center shrink-0 group-hover:bg-brand-green group-hover:text-white transition-all duration-300">
+                <div className="w-12 h-12 rounded-xl bg-brand-green/10 dark:bg-brand-green/20 flex items-center justify-center shrink-0 group-hover:bg-brand-green group-hover:text-white transition-colors duration-300">
                   <Icon className="w-5 h-5 text-brand-green group-hover:text-white transition-colors duration-300" />
                 </div>
                 <div className="pt-1">
@@ -73,8 +73,11 @@ export default function ContactPage() {
               <input
                 type="text"
                 id="name"
-                className="w-full px-4 py-3 bg-white dark:bg-zinc-700/50 border border-slate-300 dark:border-zinc-600 text-slate-900 dark:text-zinc-100 rounded-lg focus:border-brand-blue focus:ring-1 focus:ring-brand-blue outline-none transition-all duration-300 placeholder:text-zinc-400 dark:placeholder:text-zinc-500"
-                placeholder="Your full name"
+                name="name"
+                autoComplete="name"
+                required
+                className="w-full px-4 py-3 bg-white dark:bg-zinc-700/50 border border-slate-300 dark:border-zinc-600 text-slate-900 dark:text-zinc-100 rounded-lg focus:border-brand-blue focus:ring-1 focus:ring-brand-blue outline-none transition-colors duration-300 placeholder:text-zinc-400 dark:placeholder:text-zinc-500"
+                placeholder="Your full name…"
               />
             </div>
             <div>
@@ -84,8 +87,12 @@ export default function ContactPage() {
               <input
                 type="email"
                 id="email"
-                className="w-full px-4 py-3 bg-white dark:bg-zinc-700/50 border border-slate-300 dark:border-zinc-600 text-slate-900 dark:text-zinc-100 rounded-lg focus:border-brand-blue focus:ring-1 focus:ring-brand-blue outline-none transition-all duration-300 placeholder:text-zinc-400 dark:placeholder:text-zinc-500"
-                placeholder="your@email.com"
+                name="email"
+                autoComplete="email"
+                spellCheck={false}
+                required
+                className="w-full px-4 py-3 bg-white dark:bg-zinc-700/50 border border-slate-300 dark:border-zinc-600 text-slate-900 dark:text-zinc-100 rounded-lg focus:border-brand-blue focus:ring-1 focus:ring-brand-blue outline-none transition-colors duration-300 placeholder:text-zinc-400 dark:placeholder:text-zinc-500"
+                placeholder="your@email.com…"
               />
             </div>
             <div>
@@ -95,8 +102,10 @@ export default function ContactPage() {
               <input
                 type="tel"
                 id="phone"
-                className="w-full px-4 py-3 bg-white dark:bg-zinc-700/50 border border-slate-300 dark:border-zinc-600 text-slate-900 dark:text-zinc-100 rounded-lg focus:border-brand-blue focus:ring-1 focus:ring-brand-blue outline-none transition-all duration-300 placeholder:text-zinc-400 dark:placeholder:text-zinc-500"
-                placeholder="+91 98765 43210"
+                name="phone"
+                autoComplete="tel"
+                className="w-full px-4 py-3 bg-white dark:bg-zinc-700/50 border border-slate-300 dark:border-zinc-600 text-slate-900 dark:text-zinc-100 rounded-lg focus:border-brand-blue focus:ring-1 focus:ring-brand-blue outline-none transition-colors duration-300 placeholder:text-zinc-400 dark:placeholder:text-zinc-500"
+                placeholder="+91 98765 43210…"
               />
             </div>
             <div>
@@ -105,14 +114,16 @@ export default function ContactPage() {
               </label>
               <textarea
                 id="message"
+                name="message"
                 rows="5"
-                className="w-full px-4 py-3 bg-white dark:bg-zinc-700/50 border border-slate-300 dark:border-zinc-600 text-slate-900 dark:text-zinc-100 rounded-lg focus:border-brand-blue focus:ring-1 focus:ring-brand-blue outline-none transition-all duration-300 resize-none placeholder:text-zinc-400 dark:placeholder:text-zinc-500"
-                placeholder="Tell us about your requirements..."
+                required
+                className="w-full px-4 py-3 bg-white dark:bg-zinc-700/50 border border-slate-300 dark:border-zinc-600 text-slate-900 dark:text-zinc-100 rounded-lg focus:border-brand-blue focus:ring-1 focus:ring-brand-blue outline-none transition-colors duration-300 resize-none placeholder:text-zinc-400 dark:placeholder:text-zinc-500"
+                placeholder="Tell us about your requirements…"
               />
             </div>
             <button
               type="submit"
-              className="group inline-flex items-center gap-2 px-8 py-3.5 bg-brand-blue text-white font-semibold rounded-lg hover:bg-brand-dark hover:shadow-lg hover:shadow-brand-blue/25 transition-all duration-300"
+              className="group inline-flex items-center gap-2 px-8 py-3.5 bg-brand-blue text-white font-semibold rounded-lg hover:bg-brand-dark hover:shadow-lg hover:shadow-brand-blue/25 transition-colors duration-300 font-display"
             >
               Send Message
               <Send className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />

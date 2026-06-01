@@ -36,9 +36,12 @@ export default function Navbar() {
   }
 
   const linkClass = () => {
-    const base = 'text-sm font-bold uppercase tracking-widest transition-all duration-300 relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full'
-    if (!isHome) return `${base} text-white hover:text-white/80`
-    return `${base} ${scrolled || menuOpen ? 'text-gray-700 dark:text-zinc-200 hover:text-brand-green' : 'text-white hover:text-brand-green drop-shadow-md'}`
+    const isLight = isHome && scrolled && theme === 'light'
+    const base = 'font-display text-sm font-bold uppercase tracking-widest transition-colors duration-300 relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:transition-all after:duration-300 hover:after:w-full'
+    const underline = isLight ? 'after:bg-brand-green' : 'after:bg-white'
+    if (!isHome) return `${base} ${underline} text-white hover:text-white/80`
+    if (scrolled || menuOpen) return `${base} ${underline} ${isLight ? 'text-gray-700 hover:text-brand-green' : 'text-zinc-200 hover:text-brand-green'}`
+    return `${base} ${underline} text-white hover:text-brand-green drop-shadow-md`
   }
 
   return (
@@ -70,7 +73,7 @@ export default function Navbar() {
           <Link href="/contact" className={linkClass()}>Contact</Link>
           <div className={`flex items-center gap-1 pl-4 border-l ${!isHome ? 'border-white/30' : 'border-zinc-300 dark:border-zinc-600'}`}>
             <SearchBar scrolled={scrolled} isHome={isHome} />
-            <ThemeToggle isHome={isHome} />
+            <ThemeToggle isHome={isHome} scrolled={scrolled} />
             <Link
               href="/contact"
               className={`px-5 py-2.5 text-sm font-bold transition-all duration-300 rounded-lg shadow-lg ${
@@ -101,7 +104,7 @@ export default function Navbar() {
       </nav>
 
       {menuOpen && (
-        <div className="fixed inset-0 z-40 bg-slate-900/98 backdrop-blur-2xl">
+        <div className="fixed inset-0 z-40 bg-slate-900/98 backdrop-blur-2xl" style={{ overscrollBehavior: 'contain' }}>
           <div className="flex flex-col items-center justify-center h-full gap-10">
             <Link href="/" onClick={() => setMenuOpen(false)} className="text-white text-lg font-bold uppercase tracking-widest hover:text-brand-green transition-colors">Home</Link>
             <button onClick={() => scrollToSection('categories')} className="text-white text-lg font-bold uppercase tracking-widest hover:text-brand-green transition-colors">Categories</button>

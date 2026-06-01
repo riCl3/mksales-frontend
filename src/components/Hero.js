@@ -13,7 +13,7 @@ export default function Hero() {
   }, [])
 
   return (
-    <section className="relative h-screen w-full overflow-hidden">
+    <section className="relative h-screen w-full overflow-hidden" aria-label="Hero banner">
       <video autoPlay muted loop playsInline className="absolute inset-0 h-full w-full object-cover">
         <source src="/hero-video.mp4" type="video/mp4" />
       </video>
@@ -43,7 +43,7 @@ export default function Hero() {
           <div className="flex flex-wrap gap-4">
             <Link
               href="/products"
-              className="group inline-flex items-center gap-2 px-8 py-3.5 bg-brand-blue text-white font-bold text-sm uppercase tracking-wider hover:bg-brand-dark transition-all duration-300 rounded-lg shadow-xl shadow-brand-blue/30 hover:shadow-brand-blue/50 hover:-translate-y-0.5"
+              className="group inline-flex items-center gap-2 px-8 py-3.5 bg-brand-blue text-white font-bold text-sm uppercase tracking-wider hover:bg-brand-dark transition-colors duration-300 rounded-lg shadow-xl shadow-brand-blue/30 hover:shadow-brand-blue/50 hover:-translate-y-0.5 font-display"
             >
               View Products
               <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -52,7 +52,7 @@ export default function Hero() {
             </Link>
             <Link
               href="/contact"
-              className="inline-flex items-center px-8 py-3.5 border-2 border-white/80 text-white font-bold text-sm uppercase tracking-wider hover:bg-white hover:text-zinc-900 transition-all duration-300 rounded-lg backdrop-blur-sm"
+              className="inline-flex items-center px-8 py-3.5 border-2 border-white/80 text-white font-bold text-sm uppercase tracking-wider hover:bg-white hover:text-zinc-900 transition-colors duration-300 rounded-lg backdrop-blur-sm font-display"
             >
               Get Quote
             </Link>
@@ -62,7 +62,7 @@ export default function Hero() {
 
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 animate-fade-in" style={{ animationDelay: '2s', opacity: mounted ? 1 : 0, transition: 'opacity 1s ease-out 2s' }}>
         <span className="text-zinc-400 text-xs uppercase tracking-widest">Scroll</span>
-        <ArrowDown className="w-4 h-4 text-zinc-400 animate-bounce" />
+        <ArrowDown className="w-4 h-4 text-zinc-400 animate-bounce" aria-hidden="true" />
       </div>
     </section>
   )

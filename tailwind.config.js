@@ -16,7 +16,9 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ['var(--font-inter)', 'Inter', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        sans: ['var(--font-poppins)', 'Poppins', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        display: ['var(--font-campton)', 'Campton', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        body: ['var(--font-poppins)', 'Poppins', 'Helvetica Neue', 'Arial', 'sans-serif'],
       },
       spacing: {
         '18': '4.5rem',

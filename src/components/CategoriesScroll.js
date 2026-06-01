@@ -1,8 +1,9 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 const gradients = [
   'from-brand-blue to-brand-dark',
@@ -15,20 +16,47 @@ const gradients = [
   'from-slate-800 to-brand-dark',
 ]
 
+const CARD_WIDTH = 340
+const AUTO_SCROLL_INTERVAL = 3000
+
 export default function CategoriesScroll({ categories }) {
   const scrollRef = useRef(null)
+  const autoScrollRef = useRef(null)
+  const isHoveredRef = useRef(false)
 
   const scrollLeft = () => {
     if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: -340, behavior: 'smooth' })
+      scrollRef.current.scrollBy({ left: -CARD_WIDTH, behavior: 'smooth' })
     }
   }
 
-  const scrollRight = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: 340, behavior: 'smooth' })
+  const scrollRight = useCallback(() => {
+    if (!scrollRef.current) return
+    const el = scrollRef.current
+    const maxScroll = el.scrollWidth - el.clientWidth
+    // Loop back to start if at end
+    if (el.scrollLeft >= maxScroll - 10) {
+      el.scrollTo({ left: 0, behavior: 'smooth' })
+    } else {
+      el.scrollBy({ left: CARD_WIDTH, behavior: 'smooth' })
     }
-  }
+  }, [])
+
+  // Auto-scroll effect
+  useEffect(() => {
+    if (!categories || categories.length <= 1) return
+
+    const startAutoScroll = () => {
+      autoScrollRef.current = setInterval(() => {
+        if (!isHoveredRef.current) {
+          scrollRight()
+        }
+      }, AUTO_SCROLL_INTERVAL)
+    }
+
+    startAutoScroll()
+    return () => clearInterval(autoScrollRef.current)
+  }, [categories, scrollRight])
 
   if (!categories || categories.length === 0) {
     return (
@@ -45,23 +73,25 @@ export default function CategoriesScroll({ categories }) {
   return (
     <>
       <div className="relative z-10 mb-10 px-6 md:px-8 lg:px-12 flex items-center justify-between">
-        <h2 className="text-display-md text-slate-900">Categories</h2>
+        <h2 className="text-display-md text-slate-900 dark:text-white">Categories</h2>
 
         <div className="flex items-center gap-3">
           <button
             type="button"
             onClick={scrollLeft}
-            className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-brand-green hover:text-white hover:border-brand-green transition-all duration-300"
+            aria-label="Scroll categories left"
+            className="w-10 h-10 rounded-full border border-slate-200 dark:border-zinc-600 flex items-center justify-center text-slate-600 dark:text-zinc-300 hover:bg-brand-green hover:text-white hover:border-brand-green transition-colors duration-300"
           >
-            &#8592;
+            <ChevronLeft className="w-5 h-5" />
           </button>
 
           <button
             type="button"
             onClick={scrollRight}
-            className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-brand-green hover:text-white hover:border-brand-green transition-all duration-300"
+            aria-label="Scroll categories right"
+            className="w-10 h-10 rounded-full border border-slate-200 dark:border-zinc-600 flex items-center justify-center text-slate-600 dark:text-zinc-300 hover:bg-brand-green hover:text-white hover:border-brand-green transition-colors duration-300"
           >
-            &#8594;
+            <ChevronRight className="w-5 h-5" />
           </button>
         </div>
       </div>
@@ -70,6 +100,10 @@ export default function CategoriesScroll({ categories }) {
         <div
           ref={scrollRef}
           className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide"
+          onMouseEnter={() => { isHoveredRef.current = true }}
+          onMouseLeave={() => { isHoveredRef.current = false }}
+          onTouchStart={() => { isHoveredRef.current = true }}
+          onTouchEnd={() => { setTimeout(() => { isHoveredRef.current = false }, 2000) }}
         >
           {categories.map((cat, i) => (
             <Link

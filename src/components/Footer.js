@@ -27,10 +27,10 @@ export default function Footer() {
               <a
                 key={social.label}
                 href="#"
-                className="w-10 h-10 rounded-full bg-slate-800 dark:bg-zinc-800 flex items-center justify-center text-slate-400 hover:bg-brand-green hover:text-white hover:shadow-lg hover:shadow-brand-green/30 transition-all duration-300"
+                className="w-10 h-10 rounded-full bg-slate-800 dark:bg-zinc-800 flex items-center justify-center text-slate-400 hover:bg-brand-green hover:text-white hover:shadow-lg hover:shadow-brand-green/30 transition-colors duration-300"
                 aria-label={social.label}
               >
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path d={social.path} />
                 </svg>
               </a>

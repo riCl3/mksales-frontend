@@ -153,7 +153,7 @@ export default function TestimonialsSection() {
                   {t.name.split(' ').map(n => n[0]).join('')}
                 </div>
                 <div>
-                  <p className="font-semibold text-white">{t.name}</p>
+                  <p className="font-semibold text-white font-display">{t.name}</p>
                   <p className="text-sm text-zinc-400">{t.role}, {t.company}</p>
                 </div>
               </div>
