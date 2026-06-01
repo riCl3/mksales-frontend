@@ -92,7 +92,7 @@ export default function WhyChooseUs() {
                     <div className="w-10 h-10 rounded-lg bg-brand-green/10 flex items-center justify-center group-hover:bg-brand-green/20 transition-colors">
                       <Icon className="w-5 h-5 text-brand-green" />
                     </div>
-                    <span className="inline-flex items-center px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-brand-green bg-brand-green/10 rounded-full">
+                    <span className="inline-flex items-center px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-brand-green bg-brand-green/10 rounded-full font-display">
                       {feature.badge}
                     </span>
                   </div>

@@ -4,10 +4,11 @@
 
 @layer base {
   html {
-    font-family: var(--font-inter), Inter, Helvetica Neue, Arial, sans-serif;
+    font-family: var(--font-poppins), Poppins, Helvetica Neue, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     scroll-behavior: smooth;
+    color-scheme: light dark;
   }
 
   body {
@@ -22,7 +23,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-semibold tracking-tight;
+    @apply font-display font-semibold tracking-tight;
   }
 
   h1 { @apply text-display-2xl; }
@@ -35,7 +36,11 @@
   }
 
   a {
-    @apply transition-all duration-300;
+    @apply transition-colors duration-300;
+  }
+
+  button, a[href] {
+    touch-action: manipulation;
   }
 
   ::selection { @apply bg-brand-blue/20 text-brand-dark; }
@@ -48,8 +53,8 @@
 @layer components {
   .btn {
     @apply inline-flex items-center justify-center px-6 py-3
-           font-medium text-sm uppercase tracking-wider
-           transition-all duration-300
+           font-display font-medium text-sm uppercase tracking-wider
+           transition-colors transition-shadow duration-300
            focus:outline-none focus:ring-2 focus:ring-offset-2
            disabled:opacity-50 disabled:cursor-not-allowed;
   }
@@ -83,7 +88,7 @@
   .card {
     @apply bg-white dark:bg-zinc-800/90 border border-zinc-200/70 dark:border-zinc-700/50
            rounded-xl shadow-sm
-           transition-all duration-300;
+           transition-colors transition-shadow duration-300;
   }
 
   .card-hover {
@@ -105,9 +110,17 @@
     @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-green to-brand-blue;
   }
 
+  .price-text {
+    font-variant-numeric: tabular-nums;
+  }
+
   .glass {
     @apply bg-white/70 dark:bg-zinc-900/70 backdrop-blur-2xl
            border border-white/20 dark:border-zinc-700/30 shadow-xl;
+  }
+
+  .font-display {
+    font-family: var(--font-campton), Campton, Helvetica Neue, Arial, sans-serif;
   }
 }
 
@@ -280,6 +293,17 @@
   50% { transform: translateY(-10px) scale(1.02); }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* TrustSection CSS-only animated orbs */
 .trust-orb {
   position: absolute;
@@ -330,4 +354,17 @@
   50% { transform: translate(15px, -25px) scale(1.08); }
 }
 
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 
+  .trust-orb { animation: none !important; }
+  .animate-glow { animation: none !important; }
+  .animate-shimmer { animation: none !important; }
+  .image-shine::after { animation: none !important; }
+}
