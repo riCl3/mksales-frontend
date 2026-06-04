@@ -10,6 +10,7 @@ async function getProduct(slug) {
     query GetProductBySlug($id: ID!) {
       product(id: $id, idType: SLUG) {
         name
+        slug
         description
         ... on SimpleProduct {
           price

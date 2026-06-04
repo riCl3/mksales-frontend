@@ -4,7 +4,7 @@ import { useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
-import { Shield, Truck, Clock, Award, ArrowRight, Package, Sparkles } from 'lucide-react'
+import { Shield, Truck, Clock, Award, ArrowRight, Package, Sparkles, FileText } from 'lucide-react'
 
 const trustBadges = [
   { icon: Shield, label: 'BIS Certified', color: 'from-brand-blue to-blue-400' },
@@ -193,7 +193,7 @@ export default function ProductDetailClient({ product }) {
             </motion.h1>
 
             {/* Description */}
-            {product.shortDescription && (
+            {product.shortDescription && !product.shortDescription.includes('drive.google.com') && (
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -224,12 +224,15 @@ export default function ProductDetailClient({ product }) {
               </motion.div>
 
               <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
-                <Link
-                  href="/products"
+                <a
+                  href={`/product/${product.slug}/viewer`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-8 py-3.5 border-2 border-brand-blue text-brand-blue font-semibold text-sm uppercase tracking-wider hover:bg-brand-blue hover:text-white transition-colors duration-300 rounded-xl font-display"
                 >
-                  All Products
-                </Link>
+                  <FileText className="w-4 h-4" />
+                  View Details
+                </a>
               </motion.div>
             </motion.div>
 
