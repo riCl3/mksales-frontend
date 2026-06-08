@@ -126,7 +126,7 @@ export default function ProductDetailClient({ product }) {
       <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_top,rgba(0,124,189,0.04),transparent_60%)] dark:bg-[radial-gradient(ellipse_at_top,rgba(0,124,189,0.06),transparent_60%)]" />
 
       {/* Breadcrumb */}
-      <div className="relative z-10 pt-28 pb-16">
+      <div className="relative z-10 pt-28 pb-8">
         <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
           <motion.nav
             initial={{ opacity: 0, y: -10 }}
@@ -140,6 +140,19 @@ export default function ProductDetailClient({ product }) {
             <span className="text-[#C7C7C7] dark:text-zinc-600">/</span>
             <span className="text-brand-darkBlue dark:text-white font-semibold truncate max-w-[200px]">{product.name}</span>
           </motion.nav>
+        </div>
+      </div>
+
+      {/* Page Header */}
+      <div className="relative z-10 pb-12">
+        <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
+          <div className="max-w-3xl">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="inline-block w-1.5 h-6 bg-brand-green rounded-full" />
+              <span className="text-sm font-semibold uppercase tracking-widest text-brand-green">Product Detail</span>
+            </div>
+            <h1 className="text-display-xl text-brand-darkBlue dark:text-white mb-4">{product.name}</h1>
+          </div>
         </div>
       </div>
 
@@ -173,24 +186,6 @@ export default function ProductDetailClient({ product }) {
                 ))}
               </div>
             )}
-
-            {/* Product Title */}
-            <motion.h1
-              initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
-              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              transition={{ duration: 0.7, delay: 0.2, ease }}
-              className="text-4xl lg:text-5xl font-bold text-brand-darkBlue dark:text-white leading-tight mb-6 font-display"
-            >
-              {product.name}
-              {/* Accent line under title */}
-              <motion.div
-                className="h-1 w-16 bg-gradient-to-r from-brand-green to-brand-blue rounded-full mt-3"
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: 0.6, delay: 0.6, ease }}
-                style={{ originX: 0 }}
-              />
-            </motion.h1>
 
             {/* Description */}
             {product.shortDescription && !product.shortDescription.includes('drive.google.com') && (

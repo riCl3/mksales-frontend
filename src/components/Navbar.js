@@ -36,33 +36,28 @@ export default function Navbar() {
   }
 
   const linkClass = () => {
-    const isLight = isHome && scrolled && theme === 'light'
+    const isLight = scrolled && theme === 'light'
     const base = 'font-display text-sm font-bold uppercase tracking-widest transition-colors duration-300 relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:transition-all after:duration-300 hover:after:w-full'
     const underline = isLight ? 'after:bg-brand-green' : 'after:bg-white'
-    if (!isHome) return `${base} ${underline} text-white hover:text-white/80`
     if (scrolled || menuOpen) return `${base} ${underline} ${isLight ? 'text-gray-700 hover:text-brand-green' : 'text-zinc-200 hover:text-brand-green'}`
     return `${base} ${underline} text-white hover:text-brand-green drop-shadow-md`
   }
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-      !isHome
-        ? 'bg-gradient-to-r from-[#008F37] to-[#007CBD] shadow-lg'
-        : scrolled
-          ? 'bg-white/90 dark:bg-zinc-900/90 backdrop-blur-2xl border-b border-brand-green/30 dark:border-brand-green/20 shadow-lg shadow-brand-green/5'
-          : 'bg-gradient-to-b from-black/60 via-black/30 to-transparent'
+      scrolled
+        ? 'bg-white/90 dark:bg-zinc-900/90 backdrop-blur-2xl border-b border-brand-green/30 dark:border-brand-green/20 shadow-lg shadow-brand-green/5'
+        : 'bg-gradient-to-b from-black/60 via-black/30 to-transparent'
     }`}>
       <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 md:px-8 py-4 gap-4">
         <Link
           href="/"
           className="shrink-0"
         >
-          {mounted && ((!isHome) ? (
-            <Image src="/logo-white.svg" alt="MK Sales" width={140} height={56} priority />
-          ) : (scrolled && theme === 'light') ? (
-            <Image src="/logo-dark.svg" alt="MK Sales" width={140} height={56} priority />
+          {mounted && ((scrolled && theme === 'light') ? (
+            <Image src="/logo-dark.svg" alt="MK Sales" width={100} height={40} priority />
           ) : (
-            <Image src="/logo-light.svg" alt="MK Sales" width={140} height={56} priority />
+            <Image src="/logo-light.svg" alt="MK Sales" width={100} height={40} priority />
           ))}
         </Link>
 
@@ -71,16 +66,12 @@ export default function Navbar() {
           <button onClick={() => { if (isHome) { scrollToSection('categories'); } else { window.location.href = '/#categories'; } }} className={linkClass()}>Categories</button>
           <Link href="/products" className={linkClass()}>Products</Link>
           <Link href="/contact" className={linkClass()}>Contact</Link>
-          <div className={`flex items-center gap-1 pl-4 border-l ${!isHome ? 'border-white/30' : 'border-zinc-300 dark:border-zinc-600'}`}>
-            <SearchBar scrolled={scrolled} isHome={isHome} />
-            <ThemeToggle isHome={isHome} scrolled={scrolled} />
+          <div className="flex items-center gap-1 pl-4 border-l border-zinc-300 dark:border-zinc-600">
+            <SearchBar scrolled={scrolled} />
+            <ThemeToggle scrolled={scrolled} />
             <Link
               href="/contact"
-              className={`px-5 py-2.5 text-sm font-bold transition-all duration-300 rounded-lg shadow-lg ${
-                !isHome
-                  ? 'bg-white text-[#007CBD] hover:bg-white/90 shadow-white/20'
-                  : 'bg-brand-blue text-white hover:bg-brand-dark shadow-brand-blue/25 hover:shadow-brand-blue/40 hover:-translate-y-0.5'
-              }`}
+              className="px-5 py-2.5 text-sm font-bold transition-all duration-300 rounded-lg shadow-lg bg-brand-blue text-white hover:bg-brand-dark shadow-brand-blue/25 hover:shadow-brand-blue/40 hover:-translate-y-0.5"
             >
               Get Quote
             </Link>
@@ -88,7 +79,7 @@ export default function Navbar() {
         </div>
 
         <div className="md:hidden flex items-center gap-2">
-          <SearchBar scrolled={scrolled} isHome={isHome} />
+          <SearchBar scrolled={scrolled} />
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="relative z-50 p-2"
@@ -98,7 +89,7 @@ export default function Navbar() {
             {menuOpen ? (
               <X className="w-6 h-6 text-white" />
             ) : (
-              <Menu className={`w-6 h-6 ${!isHome ? 'text-white' : scrolled ? 'text-gray-800 dark:text-zinc-100' : 'text-white'}`} />
+              <Menu className={`w-6 h-6 ${scrolled ? 'text-gray-800 dark:text-zinc-100' : 'text-white'}`} />
             )}
           </button>
         </div>
@@ -117,11 +108,7 @@ export default function Navbar() {
             <Link
               href="/contact"
               onClick={() => setMenuOpen(false)}
-              className={`px-8 py-3 font-bold transition-all duration-300 rounded-lg shadow-lg ${
-                !isHome
-                  ? 'bg-white text-[#007CBD] hover:bg-white/90 shadow-white/30'
-                  : 'bg-brand-blue text-white hover:bg-brand-dark shadow-brand-blue/30'
-              }`}
+              className="px-8 py-3 font-bold transition-all duration-300 rounded-lg shadow-lg bg-brand-blue text-white hover:bg-brand-dark shadow-brand-blue/30"
             >
               Get Quote
             </Link>
