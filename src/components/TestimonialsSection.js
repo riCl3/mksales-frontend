@@ -6,22 +6,10 @@ import { ChevronLeft, ChevronRight, Quote } from 'lucide-react'
 
 const testimonials = [
   {
-    name: 'Rajesh Mehta',
-    role: 'Project Director',
-    company: 'Larsen & Toubro',
-    text: 'MK Sales has been our trusted partner for construction materials across 12 major projects in Maharashtra. Their consistency in quality and delivery timelines is unmatched.',
-  },
-  {
-    name: 'Priya Sharma',
-    role: 'Procurement Head',
-    company: 'Tata Projects',
-    text: 'The steel and structural materials from MK Sales meet the highest industry standards. Their Pan-India logistics network ensures we never face material shortages on site.',
-  },
-  {
-    name: 'Vikram Singh',
-    role: 'Site Manager',
-    company: 'DLF Construction',
-    text: 'We have been sourcing cement and aggregates from MK Sales for 5 years. Their pricing is competitive and the quality control is rigorous. Highly recommended.',
+    name: 'S & P Construction',
+    role: '',
+    company: 'Baripada, Orissa',
+    text: 'We are satisfied with the crash barriers supplied by MK Sales. The products were IRC & MorTH compliant, manufactured using quality materials as per our technical specifications, and met our project requirements effectively.',
   },
 ]
 
@@ -154,7 +142,7 @@ export default function TestimonialsSection() {
                 </div>
                 <div>
                   <p className="font-semibold text-white font-display">{t.name}</p>
-                  <p className="text-sm text-zinc-400">{t.role}, {t.company}</p>
+                  <p className="text-sm text-zinc-400">{t.role ? `${t.role}, ${t.company}` : t.company}</p>
                 </div>
               </div>
             </motion.div>
@@ -162,33 +150,35 @@ export default function TestimonialsSection() {
         </div>
 
         {/* Controls */}
-        <div className="flex items-center justify-center gap-6 mt-10">
-          <button
-            onClick={() => { clearInterval(intervalRef.current); paginate(-1); intervalRef.current = setInterval(() => paginate(1), 6000) }}
-            className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:bg-brand-green hover:text-white hover:border-brand-green transition-all duration-300"
-          >
-            <ChevronLeft className="w-5 h-5" />
-          </button>
+        {testimonials.length > 1 && (
+          <div className="flex items-center justify-center gap-6 mt-10">
+            <button
+              onClick={() => { clearInterval(intervalRef.current); paginate(-1); intervalRef.current = setInterval(() => paginate(1), 6000) }}
+              className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:bg-brand-green hover:text-white hover:border-brand-green transition-all duration-300"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
 
-          <div className="flex gap-2.5">
-            {testimonials.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => goTo(i)}
-                className={`h-2 rounded-full transition-all duration-400 ${
-                  i === current ? 'bg-brand-green w-8' : 'bg-white/20 w-2 hover:bg-white/40'
-                }`}
-              />
-            ))}
+            <div className="flex gap-2.5">
+              {testimonials.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => goTo(i)}
+                  className={`h-2 rounded-full transition-all duration-400 ${
+                    i === current ? 'bg-brand-green w-8' : 'bg-white/20 w-2 hover:bg-white/40'
+                  }`}
+                />
+              ))}
+            </div>
+
+            <button
+              onClick={() => { clearInterval(intervalRef.current); paginate(1); intervalRef.current = setInterval(() => paginate(1), 6000) }}
+              className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:bg-brand-green hover:text-white hover:border-brand-green transition-all duration-300"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
           </div>
-
-          <button
-            onClick={() => { clearInterval(intervalRef.current); paginate(1); intervalRef.current = setInterval(() => paginate(1), 6000) }}
-            className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:bg-brand-green hover:text-white hover:border-brand-green transition-all duration-300"
-          >
-            <ChevronRight className="w-5 h-5" />
-          </button>
-        </div>
+        )}
       </div>
     </section>
   )

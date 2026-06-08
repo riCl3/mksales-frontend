@@ -123,7 +123,7 @@ export default function CategoriesScroll({ categories }) {
               )}
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
               <div className="absolute inset-0 flex items-end p-6">
-                <h3 className="text-xl font-semibold text-white">{cat.name}</h3>
+                <h3 className="text-xl font-normal text-white">{cat.name}</h3>
               </div>
             </Link>
           ))}

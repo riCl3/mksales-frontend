@@ -5,9 +5,9 @@ import { motion } from 'framer-motion'
 import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from 'lucide-react'
 
 const contactInfo = [
-  { icon: Mail, label: 'Email', value: 'info@mksales.co.in' },
-  { icon: Phone, label: 'Phone', value: '+91 98765 43210' },
-  { icon: MapPin, label: 'Address', value: 'Mumbai, Maharashtra, India' },
+  { icon: Mail, label: 'Email', value: 'info@mksalesindia.in' },
+  { icon: Phone, label: 'Phone', value: '+91 - 7063208937' },
+  { icon: MapPin, label: 'Address', value: 'Agresan Road, Khalpara, Siliguri - 734005' },
 ]
 
 const stagger = {
@@ -134,20 +134,47 @@ export default function ContactPage() {
             </div>
             <div>
               <label htmlFor="phone" className="block text-sm font-medium text-slate-700 dark:text-zinc-300 mb-2">
-                Phone Number
+                Phone No <span className="text-red-400">*</span>
               </label>
               <input
                 type="tel"
                 id="phone"
                 name="phone"
                 autoComplete="tel"
+                required
+                aria-required="true"
                 className="w-full px-4 py-3 bg-white dark:bg-zinc-700/50 border border-slate-300 dark:border-zinc-600 text-slate-900 dark:text-zinc-100 rounded-lg focus:border-brand-blue focus:ring-1 focus:ring-brand-blue outline-none transition-colors duration-300 placeholder:text-zinc-400 dark:placeholder:text-zinc-500"
-                placeholder="+91 98765 43210…"
+                placeholder="+91 7063208937…"
+              />
+            </div>
+            <div>
+              <label htmlFor="company" className="block text-sm font-medium text-slate-700 dark:text-zinc-300 mb-2">
+                Company Name
+              </label>
+              <input
+                type="text"
+                id="company"
+                name="company"
+                autoComplete="organization"
+                className="w-full px-4 py-3 bg-white dark:bg-zinc-700/50 border border-slate-300 dark:border-zinc-600 text-slate-900 dark:text-zinc-100 rounded-lg focus:border-brand-blue focus:ring-1 focus:ring-brand-blue outline-none transition-colors duration-300 placeholder:text-zinc-400 dark:placeholder:text-zinc-500"
+                placeholder="Your company name…"
+              />
+            </div>
+            <div>
+              <label htmlFor="state" className="block text-sm font-medium text-slate-700 dark:text-zinc-300 mb-2">
+                State
+              </label>
+              <input
+                type="text"
+                id="state"
+                name="state"
+                className="w-full px-4 py-3 bg-white dark:bg-zinc-700/50 border border-slate-300 dark:border-zinc-600 text-slate-900 dark:text-zinc-100 rounded-lg focus:border-brand-blue focus:ring-1 focus:ring-brand-blue outline-none transition-colors duration-300 placeholder:text-zinc-400 dark:placeholder:text-zinc-500"
+                placeholder="Your state…"
               />
             </div>
             <div>
               <label htmlFor="message" className="block text-sm font-medium text-slate-700 dark:text-zinc-300 mb-2">
-                Message <span className="text-red-400">*</span>
+                Write your query <span className="text-red-400">*</span>
               </label>
               <textarea
                 id="message"
@@ -157,6 +184,18 @@ export default function ContactPage() {
                 aria-required="true"
                 className="w-full px-4 py-3 bg-white dark:bg-zinc-700/50 border border-slate-300 dark:border-zinc-600 text-slate-900 dark:text-zinc-100 rounded-lg focus:border-brand-blue focus:ring-1 focus:ring-brand-blue outline-none transition-colors duration-300 resize-none placeholder:text-zinc-400 dark:placeholder:text-zinc-500"
                 placeholder="Tell us about your requirements…"
+              />
+            </div>
+            <div>
+              <label htmlFor="file" className="block text-sm font-medium text-slate-700 dark:text-zinc-300 mb-2">
+                Upload PDF, XLSX or JPG (max 10 MB)
+              </label>
+              <input
+                type="file"
+                id="file"
+                name="file"
+                accept=".pdf,.xlsx,.xls,.jpg,.jpeg"
+                className="w-full px-4 py-3 bg-white dark:bg-zinc-700/50 border border-slate-300 dark:border-zinc-600 text-slate-900 dark:text-zinc-100 rounded-lg focus:border-brand-blue focus:ring-1 focus:ring-brand-blue outline-none transition-colors duration-300 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-brand-blue file:text-white hover:file:bg-brand-dark file:cursor-pointer"
               />
             </div>
             {status === 'sent' && (
@@ -185,7 +224,7 @@ export default function ContactPage() {
                 </>
               ) : (
                 <>
-                  Send Message
+                  Get a Quote
                   <Send className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </>
               )}

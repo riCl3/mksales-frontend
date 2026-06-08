@@ -1,6 +1,5 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Layers, Shield, Truck, Clock, Handshake, Star } from 'lucide-react'
 
@@ -44,8 +43,6 @@ const features = [
 ]
 
 export default function WhyChooseUs() {
-  const [expanded, setExpanded] = useState(null)
-
   return (
     <section className="relative overflow-hidden py-24 bg-gradient-to-br from-brand-dark via-slate-900 to-brand-dark">
       <div className="absolute inset-0 section-texture pointer-events-none opacity-20" />
@@ -73,7 +70,6 @@ export default function WhyChooseUs() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((feature, index) => {
             const Icon = feature.icon
-            const isExpanded = expanded === index
 
             return (
               <motion.div
@@ -85,12 +81,7 @@ export default function WhyChooseUs() {
                 className="group"
               >
                 <div
-                  onClick={() => setExpanded(isExpanded ? null : index)}
-                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setExpanded(isExpanded ? null : index); }}}
-                  role="button"
-                  tabIndex={0}
-                  aria-expanded={isExpanded}
-                  className="relative h-full cursor-pointer bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 p-6 hover:border-brand-green/50 hover:shadow-xl hover:shadow-brand-green/10 transition-all duration-300"
+                  className="relative h-full bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 p-6 hover:border-brand-green/50 hover:shadow-xl hover:shadow-brand-green/10 transition-all duration-300"
                 >
                   <div className="flex items-start justify-between mb-4">
                     <div className="w-10 h-10 rounded-lg bg-brand-green/10 flex items-center justify-center group-hover:bg-brand-green/20 transition-colors">
@@ -108,17 +99,6 @@ export default function WhyChooseUs() {
                   <p className="text-sm text-zinc-400 leading-relaxed">
                     {feature.description}
                   </p>
-
-                  <div className={`mt-4 pt-3 border-t border-white/10 overflow-hidden transition-all duration-300 ${isExpanded ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}>
-                    <p className="text-sm text-zinc-400 leading-relaxed">
-                      Trusted by leading infrastructure companies across India for consistent quality and reliable supply. We deliver where others can&apos;t.
-                    </p>
-                  </div>
-
-                  <div className="mt-3 flex items-center gap-1 text-xs text-zinc-500">
-                    <span>{isExpanded ? 'Show less' : 'Click for details'}</span>
-                    <motion.span aria-hidden="true" animate={{ rotate: isExpanded ? 180 : 0 }} transition={{ duration: 0.2 }}>&#8595;</motion.span>
-                  </div>
                 </div>
               </motion.div>
             )
