@@ -9,6 +9,9 @@ async function getProduct(slug) {
         name
         slug
         shortDescription
+        image {
+          sourceUrl
+        }
       }
     }
   `;
@@ -77,5 +80,13 @@ export default async function PdfViewerPage({ params }) {
 
   const pdfUrl = `/api/pdf-proxy?url=${encodeURIComponent(driveUrl)}`;
 
-  return <PdfViewerClient pdfUrl={pdfUrl} productName={product.name} productSlug={product.slug} />;
+  return (
+    <PdfViewerClient
+      pdfUrl={pdfUrl}
+      productName={product.name}
+      productSlug={product.slug}
+      productImage={product.image?.sourceUrl || null}
+      shortDescription={product.shortDescription || ''}
+    />
+  );
 }

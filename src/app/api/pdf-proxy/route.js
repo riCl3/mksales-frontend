@@ -75,6 +75,8 @@ export async function GET(request) {
             'Pragma': 'no-cache',
             'X-Content-Type-Options': 'nosniff',
             'Content-Disposition': 'inline',
+            'X-Frame-Options': 'DENY',
+            'Referrer-Policy': 'no-referrer',
           },
         });
       }
@@ -90,6 +92,8 @@ export async function GET(request) {
         'Pragma': 'no-cache',
         'X-Content-Type-Options': 'nosniff',
         'Content-Disposition': 'inline',
+        'X-Frame-Options': 'DENY',
+        'Referrer-Policy': 'no-referrer',
       },
     });
   } catch (err) {
