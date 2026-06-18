@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from 'lucide-react'
+import { CF7_FEEDBACK_URL } from '../../lib/constants'
 
 const contactInfo = [
   { icon: Mail, label: 'Email', value: 'info@mksalesindia.in' },
@@ -33,24 +34,28 @@ export default function ContactPage() {
     setErrorMsg('')
 
     const form = e.target
-    const data = {
-      name: form.name.value.trim(),
-      email: form.email.value.trim(),
-      phone: form.phone.value.trim(),
-      message: form.message.value.trim(),
-    }
-
-    if (!data.name || !data.email || !data.message) {
-      setStatus('error')
-      setErrorMsg('Please fill in all required fields.')
-      return
-    }
+    const formData = new FormData(form)
 
     try {
-      // Simulate submit (no backend yet)
-      await new Promise((resolve) => setTimeout(resolve, 1500))
-      setStatus('sent')
-      form.reset()
+      const res = await fetch(CF7_FEEDBACK_URL, {
+        method: 'POST',
+        body: formData,
+      })
+      const data = await res.json()
+
+      if (data.status === 'mail_sent') {
+        setStatus('sent')
+        form.reset()
+      } else if (data.status === 'validation_failed' && data.invalidFields) {
+        const fieldErrors = data.invalidFields
+          .map(f => f.message)
+          .join('. ')
+        setStatus('error')
+        setErrorMsg(fieldErrors || 'Please fix the errors and try again.')
+      } else {
+        setStatus('error')
+        setErrorMsg(data.message || 'Something went wrong. Please try again or contact us directly.')
+      }
     } catch {
       setStatus('error')
       setErrorMsg('Something went wrong. Please try again or contact us directly.')
@@ -102,13 +107,13 @@ export default function ContactPage() {
             className="lg:col-span-3 space-y-6 bg-white dark:bg-zinc-800/80 rounded-2xl border border-zinc-200/70 dark:border-zinc-700/50 p-8 md:p-10 shadow-sm dark:shadow-zinc-900/50"
           >
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-slate-700 dark:text-zinc-300 mb-2">
+              <label htmlFor="your-name" className="block text-sm font-medium text-slate-700 dark:text-zinc-300 mb-2">
                 Name <span className="text-red-400">*</span>
               </label>
               <input
                 type="text"
-                id="name"
-                name="name"
+                id="your-name"
+                name="your-name"
                 autoComplete="name"
                 required
                 aria-required="true"
@@ -117,13 +122,13 @@ export default function ContactPage() {
               />
             </div>
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-slate-700 dark:text-zinc-300 mb-2">
+              <label htmlFor="your-email" className="block text-sm font-medium text-slate-700 dark:text-zinc-300 mb-2">
                 Email <span className="text-red-400">*</span>
               </label>
               <input
                 type="email"
-                id="email"
-                name="email"
+                id="your-email"
+                name="your-email"
                 autoComplete="email"
                 spellCheck={false}
                 required
@@ -133,13 +138,13 @@ export default function ContactPage() {
               />
             </div>
             <div>
-              <label htmlFor="phone" className="block text-sm font-medium text-slate-700 dark:text-zinc-300 mb-2">
+              <label htmlFor="your-phone" className="block text-sm font-medium text-slate-700 dark:text-zinc-300 mb-2">
                 Phone No <span className="text-red-400">*</span>
               </label>
               <input
                 type="tel"
-                id="phone"
-                name="phone"
+                id="your-phone"
+                name="your-phone"
                 autoComplete="tel"
                 required
                 aria-required="true"
@@ -148,37 +153,37 @@ export default function ContactPage() {
               />
             </div>
             <div>
-              <label htmlFor="company" className="block text-sm font-medium text-slate-700 dark:text-zinc-300 mb-2">
+              <label htmlFor="your-company" className="block text-sm font-medium text-slate-700 dark:text-zinc-300 mb-2">
                 Company Name
               </label>
               <input
                 type="text"
-                id="company"
-                name="company"
+                id="your-company"
+                name="your-company"
                 autoComplete="organization"
                 className="w-full px-4 py-3 bg-white dark:bg-zinc-700/50 border border-slate-300 dark:border-zinc-600 text-slate-900 dark:text-zinc-100 rounded-lg focus:border-brand-blue focus:ring-1 focus:ring-brand-blue outline-none transition-colors duration-300 placeholder:text-zinc-400 dark:placeholder:text-zinc-500"
                 placeholder="Your company name…"
               />
             </div>
             <div>
-              <label htmlFor="state" className="block text-sm font-medium text-slate-700 dark:text-zinc-300 mb-2">
+              <label htmlFor="your-state" className="block text-sm font-medium text-slate-700 dark:text-zinc-300 mb-2">
                 State
               </label>
               <input
                 type="text"
-                id="state"
-                name="state"
+                id="your-state"
+                name="your-state"
                 className="w-full px-4 py-3 bg-white dark:bg-zinc-700/50 border border-slate-300 dark:border-zinc-600 text-slate-900 dark:text-zinc-100 rounded-lg focus:border-brand-blue focus:ring-1 focus:ring-brand-blue outline-none transition-colors duration-300 placeholder:text-zinc-400 dark:placeholder:text-zinc-500"
                 placeholder="Your state…"
               />
             </div>
             <div>
-              <label htmlFor="message" className="block text-sm font-medium text-slate-700 dark:text-zinc-300 mb-2">
+              <label htmlFor="your-message" className="block text-sm font-medium text-slate-700 dark:text-zinc-300 mb-2">
                 Write your query <span className="text-red-400">*</span>
               </label>
               <textarea
-                id="message"
-                name="message"
+                id="your-message"
+                name="your-message"
                 rows="5"
                 required
                 aria-required="true"
