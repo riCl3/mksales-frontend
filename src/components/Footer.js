@@ -1,7 +1,35 @@
 'use client'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { GRAPHQL_ENDPOINT } from '../lib/constants'
 
 export default function Footer() {
+  const [categories, setCategories] = useState([])
+
+  useEffect(() => {
+    fetch(GRAPHQL_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        query: `
+          query GetCategories {
+            productCategories(first: 20, where: { hideEmpty: true }) {
+              nodes {
+                name
+                slug
+              }
+            }
+          }
+        `
+      }),
+    })
+      .then(res => res.json())
+      .then(data => {
+        setCategories(data.data?.productCategories?.nodes || [])
+      })
+      .catch(err => console.error('Connection Error:', err.message))
+  }, [])
+
   return (
     <footer className="relative bg-slate-900 dark:bg-zinc-950 text-white pt-20 pb-8 overflow-hidden" aria-label="Site footer">
       {/* Subtle top gradient */}
@@ -43,22 +71,20 @@ export default function Footer() {
         <div>
           <h4 className="font-semibold text-sm uppercase tracking-wider text-slate-300 mb-5">Categories</h4>
           <ul className="space-y-3">
-            {[
-              { name: 'Cement', slug: 'cement' },
-              { name: 'Steel', slug: 'steel' },
-              { name: 'Aggregates', slug: 'aggregates' },
-              { name: 'Bricks', slug: 'bricks' },
-              { name: 'Paints', slug: 'paints' },
-            ].map((cat) => (
-              <li key={cat.slug}>
-                <Link
-                  href={`/products?category=${cat.slug}`}
-                  className="text-slate-400 text-sm hover:text-brand-blue transition-colors duration-300"
-                >
-                  {cat.name}
-                </Link>
-              </li>
-            ))}
+            {categories.length > 0 ? (
+              categories.map((cat) => (
+                <li key={cat.slug}>
+                  <Link
+                    href={`/products?category=${cat.slug}`}
+                    className="text-slate-400 text-sm hover:text-brand-blue transition-colors duration-300"
+                  >
+                    {cat.name}
+                  </Link>
+                </li>
+              ))
+            ) : (
+              <li className="text-slate-500 text-sm">Loading...</li>
+            )}
           </ul>
         </div>
 

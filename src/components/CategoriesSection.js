@@ -2,34 +2,25 @@
 
 import { useState, useEffect } from 'react'
 import CategoriesScroll from './CategoriesScroll'
-import { GRAPHQL_ENDPOINT } from '../lib/constants'
+
+const REST_API_CATEGORIES = 'https://mksales.co.in/wp-json/wp/v2/product_cat?per_page=20&hide_empty=true'
+const PLACEHOLDER_IMG = 'https://mksales.co.in/wp-content/plugins/categories-images/assets/images/placeholder.png'
 
 export default function CategoriesSection() {
   const [categories, setCategories] = useState([])
 
   useEffect(() => {
-    fetch(GRAPHQL_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        query: `
-          query GetCategories {
-            productCategories(first: 20, where: { hideEmpty: true }) {
-              nodes {
-                name
-                slug
-                image {
-                  sourceUrl
-                }
-              }
-            }
-          }
-        `
-      }),
-    })
+    fetch(REST_API_CATEGORIES)
       .then(res => res.json())
       .then(data => {
-        setCategories(data.data?.productCategories?.nodes || [])
+        const nodes = (Array.isArray(data) ? data : []).map(cat => ({
+          name: cat.name,
+          slug: cat.slug,
+          image: cat.z_taxonomy_image_url && cat.z_taxonomy_image_url !== PLACEHOLDER_IMG
+            ? { sourceUrl: cat.z_taxonomy_image_url }
+            : null,
+        }))
+        setCategories(nodes)
       })
       .catch(err => console.error('Connection Error:', err.message))
   }, [])
