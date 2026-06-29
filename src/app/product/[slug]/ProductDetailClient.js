@@ -1,9 +1,8 @@
 'use client'
 
-import { useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Shield, Truck, Clock, Award, ArrowRight, Package, Sparkles, FileText } from 'lucide-react'
 
 const trustBadges = [
@@ -16,33 +15,8 @@ const trustBadges = [
 const ease = [0.4, 0, 0.2, 1]
 
 function FloatingImage({ src, alt }) {
-  const containerRef = useRef(null)
-  const mouseX = useMotionValue(0)
-  const mouseY = useMotionValue(0)
-  const springX = useSpring(mouseX, { stiffness: 100, damping: 20 })
-  const springY = useSpring(mouseY, { stiffness: 100, damping: 20 })
-  const rotateX = useTransform(springY, [-0.5, 0.5], [4, -4])
-  const rotateY = useTransform(springX, [-0.5, 0.5], [-4, 4])
-
-  const handleMouseMove = (e) => {
-    if (!containerRef.current) return
-    const rect = containerRef.current.getBoundingClientRect()
-    mouseX.set((e.clientX - rect.left) / rect.width - 0.5)
-    mouseY.set((e.clientY - rect.top) / rect.height - 0.5)
-  }
-
-  const handleMouseLeave = () => {
-    mouseX.set(0)
-    mouseY.set(0)
-  }
-
   return (
-    <motion.div
-      ref={containerRef}
-      className="relative"
-      animate={{ y: [0, -6, 0] }}
-      transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-    >
+    <div className="relative">
       {/* Decorative corner accents */}
       <motion.div
         className="absolute -top-3 -left-3 w-8 h-8 border-t-2 border-l-2 border-brand-blue/40 rounded-tl-lg z-10"
@@ -73,12 +47,7 @@ function FloatingImage({ src, alt }) {
       <div className="absolute -top-8 -right-8 w-64 h-64 bg-brand-blue/10 dark:bg-brand-blue/15 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute -bottom-8 -left-8 w-56 h-56 bg-brand-green/8 dark:bg-brand-green/12 rounded-full blur-3xl pointer-events-none" />
 
-      <motion.div
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        style={{ rotateX, rotateY, transformPerspective: 1000 }}
-        className="relative aspect-square rounded-3xl overflow-hidden bg-white dark:bg-[#0A1F30] shadow-2xl shadow-brand-blue/10 dark:shadow-black/40 ring-1 ring-[#C7C7C7]/30 dark:ring-[#1A3A50] image-shine cursor-crosshair"
-      >
+      <div className="relative aspect-square rounded-3xl overflow-hidden bg-white dark:bg-[#0A1F30] shadow-2xl shadow-brand-blue/10 dark:shadow-black/40 ring-1 ring-[#C7C7C7]/30 dark:ring-[#1A3A50]">
         {src ? (
           <Image
             src={src}
@@ -98,8 +67,8 @@ function FloatingImage({ src, alt }) {
 
         {/* Inner glow overlay on hover */}
         <div className="absolute inset-0 bg-gradient-to-t from-brand-blue/0 via-transparent to-brand-green/0 opacity-0 hover:opacity-[0.03] transition-opacity duration-500 pointer-events-none" />
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   )
 }
 
