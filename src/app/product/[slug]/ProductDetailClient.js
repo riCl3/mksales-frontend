@@ -238,10 +238,10 @@ export default function ProductDetailClient({ product }) {
               <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-brand-blue/5 dark:bg-brand-blue/8 rounded-full blur-3xl pointer-events-none" />
 
               <div className="relative bg-white/60 dark:bg-white/[0.03] backdrop-blur-sm rounded-2xl border border-[#C7C7C7]/30 dark:border-[#1A3A50]/50 p-8 md:p-10 shadow-sm">
-                <div className="max-w-4xl">
+                <div className="max-w-2xl">
                   <div className="flex items-center gap-3 mb-2">
                     <div className="w-1.5 h-8 bg-gradient-to-b from-brand-green to-brand-blue rounded-full" />
-                    <h2 className="text-2xl font-bold text-brand-darkBlue dark:text-white font-display">Specifications</h2>
+                    <h2 className="text-2xl font-bold text-brand-darkBlue dark:text-white font-display">Technical Details</h2>
                   </div>
                   <div className="section-accent mb-8 ml-[18px]" />
                   <div
