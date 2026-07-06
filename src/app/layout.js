@@ -2,6 +2,7 @@ import localFont from "next/font/local";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { ThemeProvider } from "../components/ThemeProvider";
+import PageTransition from "../components/PageTransition";
 import "./globals.css";
 
 const campton = localFont({
@@ -65,7 +66,9 @@ export default function RootLayout({ children }) {
         </a>
         <ThemeProvider>
           <Navbar />
-          <main id="main-content" className="flex-1">{children}</main>
+          <main id="main-content" className="flex-1">
+            <PageTransition>{children}</PageTransition>
+          </main>
           <Footer />
         </ThemeProvider>
       </body>
