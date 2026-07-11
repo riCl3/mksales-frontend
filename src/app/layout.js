@@ -3,6 +3,8 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { ThemeProvider } from "../components/ThemeProvider";
 import PageTransition from "../components/PageTransition";
+import Script from "next/script";
+import { GA_MEASUREMENT_ID } from "../lib/constants";
 import "./globals.css";
 
 const campton = localFont({
@@ -61,6 +63,24 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="min-h-screen flex flex-col antialiased">
+        {GA_MEASUREMENT_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga4-init" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${GA_MEASUREMENT_ID}', {
+                  page_path: window.location.pathname,
+                });
+              `}
+            </Script>
+          </>
+        )}
         <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-brand-blue focus:text-white focus:rounded-lg">
           Skip to content
         </a>

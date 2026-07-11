@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { Search, X, ArrowRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { GRAPHQL_ENDPOINT } from '../lib/constants'
+import { trackSearch } from '../lib/analytics'
 
 async function searchProducts(query) {
   if (!query || query.length < 2) return []
@@ -97,6 +98,7 @@ export default function SearchBar({ scrolled, isHome = true }) {
   const handleSubmit = (e) => {
     e.preventDefault()
     if (query.trim()) {
+      trackSearch(query.trim(), results.length)
       router.push(`/search?q=${encodeURIComponent(query.trim())}`)
       setOpen(false)
       setQuery('')

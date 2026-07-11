@@ -2,8 +2,10 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
+import { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Shield, Truck, Clock, Award, ArrowRight, Package, Sparkles, FileText } from 'lucide-react'
+import { trackProductView } from '../../../lib/analytics'
 
 const trustBadges = [
   { icon: Shield, label: 'BIS Certified', color: 'from-brand-blue to-blue-400' },
@@ -74,6 +76,14 @@ function FloatingImage({ src, alt }) {
 
 export default function ProductDetailClient({ product }) {
   const categories = product.productCategories?.nodes || []
+
+  useEffect(() => {
+    trackProductView(
+      product.name,
+      product.slug,
+      product.productCategories?.nodes?.[0]?.name
+    )
+  }, [product])
 
   return (
     <motion.main
