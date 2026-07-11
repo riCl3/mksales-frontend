@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Search, ArrowRight } from 'lucide-react'
 import { GRAPHQL_ENDPOINT } from '../../lib/constants'
+import { trackSearch } from '../../lib/analytics'
 
 async function searchProducts(query) {
   if (!query) return []
@@ -59,6 +60,7 @@ export default function SearchResults() {
     setLoading(true)
     searchProducts(q).then(products => {
       setResults(products)
+      trackSearch(q, products.length)
       setLoading(false)
     })
   }, [q])
