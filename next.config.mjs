@@ -6,6 +6,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'mksales.co.in',
       },
+      {
+        protocol: 'https',
+        hostname: 'cms.mksales.co.in',
+      },
     ],
   },
 };
