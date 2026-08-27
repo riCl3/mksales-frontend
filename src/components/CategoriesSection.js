@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from 'react'
 import CategoriesScroll from './CategoriesScroll'
+import { WORDPRESS_URL } from '../lib/constants'
 
-const REST_API_CATEGORIES = 'https://mksales.co.in/wp-json/wp/v2/product_cat?per_page=20&hide_empty=true'
-const PLACEHOLDER_IMG = 'https://mksales.co.in/wp-content/plugins/categories-images/assets/images/placeholder.png'
+const REST_API_CATEGORIES = `${WORDPRESS_URL}/wp-json/wp/v2/product_cat?per_page=20&hide_empty=true`
+const PLACEHOLDER_IMG = `${WORDPRESS_URL}/wp-content/plugins/categories-images/assets/images/placeholder.png`
 
 export default function CategoriesSection() {
   const [categories, setCategories] = useState([])
