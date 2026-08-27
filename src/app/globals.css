@@ -236,6 +236,13 @@
     animation: glowPulse 3s ease-in-out infinite;
   }
 
+  /* Premium hover scale for cards */
+  .hover-premium {
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+  }
+  .hover-premium:hover {
+    transform: translateY(-4px);
+  }
 
 }
 

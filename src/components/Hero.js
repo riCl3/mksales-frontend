@@ -30,29 +30,29 @@ export default function Hero() {
           suppressHydrationWarning
           className={`max-w-2xl transition-all duration-1000 ease-out ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
         >
-          <div className="w-12 h-1 bg-brand-green mb-6" aria-hidden="true" />
-          <h1 className="mb-6 text-balance text-display-md md:text-display-2xl text-white leading-[1.1]">
+          <div className="w-14 h-[3px] bg-brand-green rounded-full mb-8" aria-hidden="true" />
+          <h1 className="mb-8 text-balance text-display-md md:text-display-2xl text-white leading-[1.08]">
             Industrial Grade Materials.
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-blue-300">
               Delivered with Precision.
             </span>
           </h1>
-          <p className="mb-10 text-xl text-zinc-300 max-w-xl">
+          <p className="mb-12 text-xl text-zinc-300/90 max-w-xl leading-relaxed">
             Reliable infrastructure solutions designed for performance, durability, and scale — backed by a Pan-India logistics network.
           </p>
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-5">
             <Link
               href="/products"
-              className="group inline-flex items-center gap-2 px-8 py-3.5 bg-brand-blue text-white font-bold text-sm uppercase tracking-wider hover:bg-brand-dark transition-colors duration-300 rounded-lg shadow-xl shadow-brand-blue/30 hover:shadow-brand-blue/50 hover:-translate-y-0.5 font-display"
+              className="group inline-flex items-center gap-2.5 px-9 py-4 bg-brand-blue text-white font-bold text-sm uppercase tracking-wider hover:bg-brand-dark transition-all duration-300 rounded-xl shadow-xl shadow-brand-blue/30 hover:shadow-brand-blue/50 hover:-translate-y-0.5 font-display"
             >
               View Products
-              <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </Link>
             <Link
               href="/contact"
-              className="inline-flex items-center px-8 py-3.5 border-2 border-white/80 text-white font-bold text-sm uppercase tracking-wider hover:bg-white hover:text-zinc-900 transition-colors duration-300 rounded-lg backdrop-blur-sm font-display"
+              className="inline-flex items-center px-9 py-4 border-2 border-white/70 text-white font-bold text-sm uppercase tracking-wider hover:bg-white hover:text-zinc-900 hover:border-white transition-all duration-300 rounded-xl font-display"
             >
               Get Quote
             </Link>

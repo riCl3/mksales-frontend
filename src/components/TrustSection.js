@@ -54,7 +54,7 @@ function TypewriterText() {
 
 export default function TrustSection() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-brand-dark via-slate-900 to-brand-dark dark:from-zinc-950 dark:via-zinc-900 dark:to-zinc-950 py-24 md:py-32">
+    <section className="relative overflow-hidden bg-gradient-to-br from-brand-dark via-slate-900 to-brand-dark dark:from-zinc-950 dark:via-zinc-900 dark:to-zinc-950 py-28 md:py-36">
       <div className="absolute inset-0 section-texture opacity-10" />
 
       <div className="absolute inset-0 overflow-hidden pointer-events-none">

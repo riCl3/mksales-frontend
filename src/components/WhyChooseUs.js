@@ -44,7 +44,7 @@ const features = [
 
 export default function WhyChooseUs() {
   return (
-    <section className="relative overflow-hidden py-24 bg-gradient-to-br from-brand-dark via-slate-900 to-brand-dark">
+    <section className="relative overflow-hidden py-28 md:py-36 bg-gradient-to-br from-brand-dark via-slate-900 to-brand-dark">
       <div className="absolute inset-0 section-texture pointer-events-none opacity-20" />
       <div className="absolute inset-0 bg-gradient-to-t from-brand-blue/20 to-transparent pointer-events-none" />
       <div className="absolute inset-0 opacity-[0.08]" style={{
@@ -67,36 +67,36 @@ export default function WhyChooseUs() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
           {features.map((feature, index) => {
             const Icon = feature.icon
 
             return (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.08 }}
+                transition={{ duration: 0.5, delay: index * 0.07 }}
                 className="group"
               >
                 <div
-                  className="relative h-full bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 p-6 hover:border-brand-green/50 hover:shadow-xl hover:shadow-brand-green/10 transition-all duration-300"
+                  className="relative h-full bg-white/[0.04] rounded-2xl border border-white/[0.08] p-7 lg:p-8 hover:bg-white/[0.07] hover:border-white/[0.15] transition-all duration-500"
                 >
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="w-10 h-10 rounded-lg bg-brand-green/10 flex items-center justify-center group-hover:bg-brand-green/20 transition-colors">
+                  <div className="flex items-start justify-between mb-5">
+                    <div className="w-11 h-11 rounded-xl bg-white/[0.06] flex items-center justify-center group-hover:bg-brand-green/15 group-hover:scale-110 transition-all duration-500">
                       <Icon className="w-5 h-5 text-brand-green" />
                     </div>
-                    <span className="inline-flex items-center px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-brand-green bg-brand-green/10 rounded-full font-display">
+                    <span className="inline-flex items-center px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white/50 bg-white/[0.04] rounded-full font-display group-hover:text-brand-green/80 group-hover:bg-brand-green/10 transition-all duration-500">
                       {feature.badge}
                     </span>
                   </div>
 
-                  <h3 className="text-base font-semibold text-white mb-1.5 group-hover:text-brand-green transition-colors">
+                  <h3 className="text-lg font-display font-semibold text-white mb-2.5 group-hover:text-brand-green transition-colors duration-300">
                     {feature.title}
                   </h3>
 
-                  <p className="text-sm text-zinc-400 leading-relaxed">
+                  <p className="text-[15px] text-zinc-400/80 leading-relaxed">
                     {feature.description}
                   </p>
                 </div>

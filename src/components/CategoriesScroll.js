@@ -5,17 +5,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
-const gradients = [
-  'from-brand-blue to-brand-dark',
-  'from-brand-green to-brand-dark',
-  'from-slate-700 to-slate-900',
-  'from-brand-dark to-slate-900',
-  'from-brand-green to-green-900',
-  'from-brand-blue to-blue-900',
-  'from-green-800 to-green-950',
-  'from-slate-800 to-brand-dark',
-]
-
 const CARD_WIDTH = 340
 const AUTO_SCROLL_INTERVAL = 3000
 
@@ -109,21 +98,28 @@ export default function CategoriesScroll({ categories }) {
             <Link
               key={cat.slug}
               href={`/products?category=${cat.slug}`}
-              className="relative flex-shrink-0 w-80 h-72 overflow-hidden snap-center group block shadow-sm hover:shadow-xl transition-shadow duration-300 rounded-xl"
+              className="relative flex-shrink-0 w-[300px] h-[240px] md:w-[340px] md:h-[280px] overflow-hidden snap-center group block rounded-2xl shadow-sm hover:shadow-2xl hover:shadow-black/15 transition-all duration-500"
             >
-              <div className={`absolute inset-0 bg-gradient-to-br ${gradients[i % gradients.length]} group-hover:scale-105 transition-transform duration-500`} />
-              {cat.image?.sourceUrl && (
+              {cat.image?.sourceUrl ? (
                 <Image
                   src={cat.image.sourceUrl}
                   alt={cat.name}
                   fill
-                  sizes="320px"
-                  className="object-cover opacity-30 group-hover:opacity-50 transition-opacity duration-500"
+                  sizes="340px"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                 />
+              ) : (
+                <div className="absolute inset-0 bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-800 dark:to-zinc-700" />
               )}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
-              <div className="absolute inset-0 flex items-end p-6">
-                <h3 className="text-xl font-normal text-white">{cat.name}</h3>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/5 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
+              <div className="absolute inset-0 flex items-end p-7">
+                <div>
+                  <h3 className="text-xl md:text-2xl font-display font-semibold text-white mb-1 drop-shadow-lg">{cat.name}</h3>
+                  <span className="inline-flex items-center gap-1.5 text-xs text-white/70 font-medium uppercase tracking-wider group-hover:text-white/90 transition-colors duration-300">
+                    Browse
+                    <svg className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                  </span>
+                </div>
               </div>
             </Link>
           ))}

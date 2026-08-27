@@ -4,11 +4,11 @@ import Link from 'next/link'
 export default function Footer({ categories = [] }) {
 
   return (
-    <footer className="relative bg-slate-900 dark:bg-zinc-950 text-white pt-20 pb-8 overflow-hidden" aria-label="Site footer">
+    <footer className="relative bg-slate-900 dark:bg-zinc-950 text-white pt-24 pb-10 overflow-hidden" aria-label="Site footer">
       {/* Subtle top gradient */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-blue/40 to-transparent" />
 
-      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
         {/* Brand */}
         <div className="lg:col-span-1">
           <h3 className="text-lg font-bold mb-2">
@@ -42,8 +42,8 @@ export default function Footer({ categories = [] }) {
 
         {/* Categories */}
         <div>
-          <h4 className="font-semibold text-sm uppercase tracking-wider text-slate-300 mb-5">Categories</h4>
-          <ul className="space-y-3">
+          <h4 className="font-semibold text-xs uppercase tracking-[0.2em] text-slate-300/80 mb-6">Categories</h4>
+          <ul className="space-y-3.5">
             {categories.length > 0 ? (
               categories.map((cat) => (
                 <li key={cat.slug}>
@@ -63,8 +63,8 @@ export default function Footer({ categories = [] }) {
 
         {/* Quick Links */}
         <div>
-          <h4 className="font-semibold text-sm uppercase tracking-wider text-slate-300 mb-5">Quick Links</h4>
-          <ul className="space-y-3">
+          <h4 className="font-semibold text-xs uppercase tracking-[0.2em] text-slate-300/80 mb-6">Quick Links</h4>
+          <ul className="space-y-3.5">
             {[
               { name: 'Home', path: '/' },
               { name: 'Products', path: '/products' },
@@ -86,7 +86,7 @@ export default function Footer({ categories = [] }) {
 
         {/* Contact */}
         <div>
-          <h4 className="font-semibold text-sm uppercase tracking-wider text-slate-300 mb-5">Contact Us</h4>
+          <h4 className="font-semibold text-xs uppercase tracking-[0.2em] text-slate-300/80 mb-6">Contact Us</h4>
           <ul className="space-y-3 text-slate-400 text-sm">
             <li className="flex items-start gap-2">
               <svg className="w-4 h-4 mt-0.5 text-brand-green shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
@@ -112,7 +112,7 @@ export default function Footer({ categories = [] }) {
       </div>
 
       {/* Bottom bar */}
-      <div className="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-slate-800 dark:border-zinc-800">
+      <div className="max-w-7xl mx-auto px-6 mt-20 pt-8 border-t border-white/[0.06]">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-slate-500 text-sm">
             &copy; 2026 MK Sales. All rights reserved.
