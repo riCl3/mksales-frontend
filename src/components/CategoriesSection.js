@@ -1,30 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
 import CategoriesScroll from './CategoriesScroll'
-import { WORDPRESS_URL } from '../lib/constants'
 
-const REST_API_CATEGORIES = `${WORDPRESS_URL}/wp-json/wp/v2/product_cat?per_page=20&hide_empty=true`
-const PLACEHOLDER_IMG = `${WORDPRESS_URL}/wp-content/plugins/categories-images/assets/images/placeholder.png`
-
-export default function CategoriesSection() {
-  const [categories, setCategories] = useState([])
-
-  useEffect(() => {
-    fetch(REST_API_CATEGORIES)
-      .then(res => res.json())
-      .then(data => {
-        const nodes = (Array.isArray(data) ? data : []).map(cat => ({
-          name: cat.name,
-          slug: cat.slug,
-          image: cat.z_taxonomy_image_url && cat.z_taxonomy_image_url !== PLACEHOLDER_IMG
-            ? { sourceUrl: cat.z_taxonomy_image_url }
-            : null,
-        }))
-        setCategories(nodes)
-      })
-      .catch(err => console.error('Connection Error:', err.message))
-  }, [])
+export default function CategoriesSection({ categories = [] }) {
 
   return (
     <section id="categories" className="py-24 md:py-32 bg-gradient-to-br from-white via-brand-blue/[0.03] to-brand-green/[0.06] dark:from-zinc-900 dark:via-zinc-900 dark:to-zinc-950 relative overflow-hidden transition-colors duration-300">

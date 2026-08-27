@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import { ThemeProvider } from "../components/ThemeProvider";
 import PageTransition from "../components/PageTransition";
 import Script from "next/script";
-import { GA_MEASUREMENT_ID } from "../lib/constants";
+import { GA_MEASUREMENT_ID, GRAPHQL_ENDPOINT } from "../lib/constants";
 import "./globals.css";
 
 const campton = localFont({
@@ -52,7 +52,31 @@ export const viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({ children }) {
+async function getFooterCategories() {
+  try {
+    const res = await fetch(GRAPHQL_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      next: { revalidate: 3600 },
+      body: JSON.stringify({
+        query: `
+          query GetCategories {
+            productCategories(first: 20, where: { hideEmpty: true }) {
+              nodes { name slug }
+            }
+          }
+        `
+      }),
+    });
+    const data = await res.json();
+    return data.data?.productCategories?.nodes || [];
+  } catch {
+    return [];
+  }
+}
+
+export default async function RootLayout({ children }) {
+  const categories = await getFooterCategories();
   return (
     <html lang="en" className={`${campton.variable} ${poppins.variable}`} suppressHydrationWarning>
       <head>
@@ -89,7 +113,7 @@ export default function RootLayout({ children }) {
           <main id="main-content" className="flex-1">
             <PageTransition>{children}</PageTransition>
           </main>
-          <Footer />
+          <Footer categories={categories} />
         </ThemeProvider>
       </body>
     </html>

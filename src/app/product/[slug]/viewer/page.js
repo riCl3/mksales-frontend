@@ -42,7 +42,7 @@ function extractDriveUrl(text) {
   return null;
 }
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
 
 export default async function PdfViewerPage({ params }) {
   const { slug } = await params;

@@ -1,34 +1,7 @@
 'use client'
-import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { GRAPHQL_ENDPOINT } from '../lib/constants'
 
-export default function Footer() {
-  const [categories, setCategories] = useState([])
-
-  useEffect(() => {
-    fetch(GRAPHQL_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        query: `
-          query GetCategories {
-            productCategories(first: 20, where: { hideEmpty: true }) {
-              nodes {
-                name
-                slug
-              }
-            }
-          }
-        `
-      }),
-    })
-      .then(res => res.json())
-      .then(data => {
-        setCategories(data.data?.productCategories?.nodes || [])
-      })
-      .catch(err => console.error('Connection Error:', err.message))
-  }, [])
+export default function Footer({ categories = [] }) {
 
   return (
     <footer className="relative bg-slate-900 dark:bg-zinc-950 text-white pt-20 pb-8 overflow-hidden" aria-label="Site footer">

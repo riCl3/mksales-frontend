@@ -71,8 +71,7 @@ export async function GET(request) {
         return new NextResponse(pdfBuffer, {
           headers: {
             'Content-Type': 'application/pdf',
-            'Cache-Control': 'no-store, no-cache, must-revalidate',
-            'Pragma': 'no-cache',
+            'Cache-Control': 'public, s-maxage=3600, max-age=3600, stale-while-revalidate=86400',
             'X-Content-Type-Options': 'nosniff',
             'Content-Disposition': 'inline',
             'X-Frame-Options': 'DENY',
@@ -88,8 +87,7 @@ export async function GET(request) {
     return new NextResponse(pdfBuffer, {
       headers: {
         'Content-Type': 'application/pdf',
-        'Cache-Control': 'no-store, no-cache, must-revalidate',
-        'Pragma': 'no-cache',
+        'Cache-Control': 'public, s-maxage=3600, max-age=3600, stale-while-revalidate=86400',
         'X-Content-Type-Options': 'nosniff',
         'Content-Disposition': 'inline',
         'X-Frame-Options': 'DENY',

@@ -2,11 +2,11 @@ import { Suspense } from 'react';
 import ProductGrid from '../../components/ProductGrid';
 import { GRAPHQL_ENDPOINT } from '../../lib/constants';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
 
-async function getProducts() {
+async function getProductsAndCategories() {
   const query = `
-    query GetProducts {
+    query GetProductsAndCategories {
       products(first: 50) {
         nodes {
           name
@@ -25,28 +25,6 @@ async function getProducts() {
           }
         }
       }
-    }
-  `;
-
-  try {
-    const res = await fetch(GRAPHQL_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      next: { revalidate: 60 },
-      body: JSON.stringify({ query }),
-    });
-
-    const data = await res.json();
-    return data.data?.products?.nodes || [];
-  } catch (err) {
-    console.error('Connection Error:', err.message);
-    return [];
-  }
-}
-
-async function getCategories() {
-  const query = `
-    query GetCategories {
       productCategories(first: 20, where: { hideEmpty: true }) {
         nodes {
           name
@@ -60,20 +38,23 @@ async function getCategories() {
     const res = await fetch(GRAPHQL_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      next: { revalidate: 60 },
+      next: { revalidate: 3600 },
       body: JSON.stringify({ query }),
     });
 
     const data = await res.json();
-    return data.data?.productCategories?.nodes || [];
+    return {
+      products: data.data?.products?.nodes || [],
+      categories: data.data?.productCategories?.nodes || [],
+    };
   } catch (err) {
     console.error('Connection Error:', err.message);
-    return [];
+    return { products: [], categories: [] };
   }
 }
 
 export default async function ProductsPage() {
-  const [products, categories] = await Promise.all([getProducts(), getCategories()]);
+  const { products, categories } = await getProductsAndCategories();
 
   return (
     <main className="min-h-screen relative bg-gradient-to-br from-white via-[#F0F5FA] to-[#E2EBF3] dark:from-[#020C14] dark:via-[#051A2A] dark:to-[#082638] transition-colors duration-300">

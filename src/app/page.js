@@ -4,15 +4,39 @@ import CategoriesSection from '../components/CategoriesSection';
 import WhyChooseUs from '../components/WhyChooseUs';
 import TestimonialsSection from '../components/TestimonialsSection';
 import Link from 'next/link';
+import { WORDPRESS_URL } from '../lib/constants';
 
-export default function HomePage() {
+export const revalidate = 3600;
+
+async function getCategories() {
+  const PLACEHOLDER_IMG = `${WORDPRESS_URL}/wp-content/plugins/categories-images/assets/images/placeholder.png`;
+  try {
+    const res = await fetch(
+      `${WORDPRESS_URL}/wp-json/wp/v2/product_cat?per_page=20&hide_empty=true`,
+      { next: { revalidate: 3600 } }
+    );
+    const data = await res.json();
+    return (Array.isArray(data) ? data : []).map(cat => ({
+      name: cat.name,
+      slug: cat.slug,
+      image: cat.z_taxonomy_image_url && cat.z_taxonomy_image_url !== PLACEHOLDER_IMG
+        ? { sourceUrl: cat.z_taxonomy_image_url }
+        : null,
+    }));
+  } catch {
+    return [];
+  }
+}
+
+export default async function HomePage() {
+  const categories = await getCategories();
   return (
     <>
       <Hero />
 
       <TrustSection />
 
-      <CategoriesSection />
+      <CategoriesSection categories={categories} />
 
       <WhyChooseUs />
 
