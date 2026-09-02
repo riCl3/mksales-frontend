@@ -1,5 +1,3 @@
-'use client'
-
 import CategoriesScroll from './CategoriesScroll'
 
 export default function CategoriesSection({ categories = [] }) {

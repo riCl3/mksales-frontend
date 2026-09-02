@@ -10,6 +10,9 @@ import "./globals.css";
 const campton = localFont({
   variable: "--font-campton",
   display: "swap",
+  preload: true,
+  fallback: ["Helvetica Neue", "Arial", "sans-serif"],
+  adjustFontFallback: "Arial",
   src: [
     { path: "../../public/fonts/campton/Campton-Book.otf", weight: "400" },
     { path: "../../public/fonts/campton/Campton-Medium.otf", weight: "500" },
@@ -21,6 +24,9 @@ const campton = localFont({
 const poppins = localFont({
   variable: "--font-poppins",
   display: "swap",
+  preload: true,
+  fallback: ["Helvetica Neue", "Arial", "sans-serif"],
+  adjustFontFallback: "Arial",
   src: [
     { path: "../../public/fonts/poppins/Poppins-Regular.ttf", weight: "400" },
     { path: "../../public/fonts/poppins/Poppins-Medium.ttf", weight: "500" },
@@ -80,6 +86,10 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en" className={`${campton.variable} ${poppins.variable}`} suppressHydrationWarning>
       <head>
+        <link rel="preconnect" href="https://mksales.co.in" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://cms.mksales.co.in" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="preload" as="image" href="/sub-hero-bg-optimized.webp" imageSrcSet="/sub-hero-bg-optimized.webp 1920w, /sub-hero-bg-optimized-2x.webp 3840w" imageSizes="100vw" fetchPriority="high" />
         <script
           dangerouslySetInnerHTML={{
             __html: `try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.classList.add('dark')}catch(e){}`,

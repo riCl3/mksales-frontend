@@ -1,7 +1,29 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
 import { Layers, Shield, Truck, Clock, Handshake, Star } from 'lucide-react'
+
+function useInViewOnce(options = {}) {
+  const ref = useRef(null)
+  const [inView, setInView] = useState(false)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setInView(true)
+      return
+    }
+    const obs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setInView(true)
+        obs.disconnect()
+      }
+    }, { threshold: 0.15, rootMargin: '0px', ...options })
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+  return [ref, inView]
+}
 
 const features = [
   {
@@ -43,6 +65,7 @@ const features = [
 ]
 
 export default function WhyChooseUs() {
+  const [headerRef, headerInView] = useInViewOnce()
   return (
     <section className="relative overflow-hidden py-28 md:py-36 bg-gradient-to-br from-brand-dark via-slate-900 to-brand-dark">
       <div className="absolute inset-0 section-texture pointer-events-none opacity-20" />
@@ -53,33 +76,28 @@ export default function WhyChooseUs() {
       }} />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+        <div
+          ref={headerRef}
           className="mb-16 text-center"
+          style={{
+            opacity: headerInView ? 1 : 0,
+            transform: headerInView ? 'translateY(0)' : 'translateY(20px)',
+            transition: 'opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+          }}
         >
           <div className="w-12 h-1 bg-brand-green mx-auto mb-4" />
           <h2 className="text-display-md text-white">Why Choose Us</h2>
           <p className="text-zinc-400 mt-4 max-w-2xl mx-auto">
             Six pillars that make MK Sales the preferred partner for construction material supply across India.
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
           {features.map((feature, index) => {
             const Icon = feature.icon
 
             return (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.07 }}
-                className="group"
-              >
+              <RevealCard key={index} delay={index * 0.07}>
                 <div
                   className="relative h-full bg-white/[0.04] rounded-2xl border border-white/[0.08] p-7 lg:p-8 hover:bg-white/[0.07] hover:border-white/[0.15] transition-all duration-500"
                 >
@@ -100,12 +118,29 @@ export default function WhyChooseUs() {
                     {feature.description}
                   </p>
                 </div>
-              </motion.div>
+              </RevealCard>
             )
           })}
         </div>
       </div>
     </section>
+  )
+}
+
+function RevealCard({ children, delay = 0 }) {
+  const [ref, inView] = useInViewOnce()
+  return (
+    <div
+      ref={ref}
+      className="group"
+      style={{
+        opacity: inView ? 1 : 0,
+        transform: inView ? 'translateY(0)' : 'translateY(24px)',
+        transition: `opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1) ${delay}s, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) ${delay}s`,
+      }}
+    >
+      {children}
+    </div>
   )
 }
 

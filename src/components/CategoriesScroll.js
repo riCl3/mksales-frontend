@@ -31,20 +31,28 @@ export default function CategoriesScroll({ categories }) {
     }
   }, [])
 
-  // Auto-scroll effect
+  // Auto-scroll effect - respects reduced motion and page visibility
   useEffect(() => {
     if (!categories || categories.length <= 1) return
+    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
     const startAutoScroll = () => {
       autoScrollRef.current = setInterval(() => {
-        if (!isHoveredRef.current) {
+        if (!isHoveredRef.current && document.visibilityState === 'visible') {
           scrollRight()
         }
       }, AUTO_SCROLL_INTERVAL)
     }
 
     startAutoScroll()
-    return () => clearInterval(autoScrollRef.current)
+    const onVis = () => {
+      if (document.visibilityState === 'visible' && !autoScrollRef.current) startAutoScroll()
+    }
+    document.addEventListener('visibilitychange', onVis)
+    return () => {
+      clearInterval(autoScrollRef.current)
+      document.removeEventListener('visibilitychange', onVis)
+    }
   }, [categories, scrollRight])
 
   if (!categories || categories.length === 0) {
@@ -98,6 +106,7 @@ export default function CategoriesScroll({ categories }) {
             <Link
               key={cat.slug}
               href={`/products?category=${cat.slug}`}
+              prefetch={false}
               className="relative flex-shrink-0 w-[300px] h-[240px] md:w-[340px] md:h-[280px] overflow-hidden snap-center group block rounded-2xl shadow-sm hover:shadow-2xl hover:shadow-black/15 transition-all duration-500"
             >
               {cat.image?.sourceUrl ? (
@@ -106,6 +115,8 @@ export default function CategoriesScroll({ categories }) {
                   alt={cat.name}
                   fill
                   sizes="340px"
+                  loading={i < 2 ? "eager" : "lazy"}
+                  decoding="async"
                   className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                 />
               ) : (

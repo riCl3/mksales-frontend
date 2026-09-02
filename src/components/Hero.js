@@ -6,17 +6,53 @@ import { ArrowDown } from 'lucide-react'
 
 export default function Hero() {
   const [mounted, setMounted] = useState(false)
+  const [videoReady, setVideoReady] = useState(false)
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false)
 
   useEffect(() => {
     const timer = setTimeout(() => setMounted(true), 100)
     return () => clearTimeout(timer)
   }, [])
 
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const isMobile = window.matchMedia('(max-width: 768px)').matches
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const saveData = navigator.connection?.saveData
+    if (isMobile || prefersReducedMotion || saveData) {
+      return
+    }
+    const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1200))
+    const id = idle(() => setShouldLoadVideo(true))
+    return () => {
+      if (window.cancelIdleCallback) window.cancelIdleCallback(id)
+      else clearTimeout(id)
+    }
+  }, [])
+
   return (
     <section className="relative h-screen w-full overflow-hidden" aria-label="Hero banner">
-      <video autoPlay muted loop playsInline poster="/sub-hero-bg.jpg" className="absolute inset-0 h-full w-full object-cover">
-        <source src="/hero-video.mp4" type="video/mp4" />
-      </video>
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 h-full w-full bg-cover bg-center"
+        style={{
+          backgroundImage: `url('/sub-hero-bg-optimized.webp')`,
+        }}
+      />
+      {shouldLoadVideo && (
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster="/sub-hero-bg-optimized.webp"
+          onCanPlay={() => setVideoReady(true)}
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${videoReady ? 'opacity-100' : 'opacity-0'}`}
+        >
+          <source src="/hero-video.mp4" type="video/mp4" />
+        </video>
+      )}
 
       <div className="absolute inset-0 bg-gradient-to-r from-zinc-900/80 via-zinc-900/50 to-zinc-900/30" />
       <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/60 via-transparent to-transparent" />

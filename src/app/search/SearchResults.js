@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { motion, AnimatePresence } from 'framer-motion'
 import { Search, ArrowRight } from 'lucide-react'
 import { GRAPHQL_ENDPOINT } from '../../lib/constants'
 import { trackSearch } from '../../lib/analytics'
@@ -117,13 +116,15 @@ export default function SearchResults() {
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          <AnimatePresence mode="popLayout">
             {results.map((product, index) => (
-              <motion.div
+              <div
                 key={product.slug}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: Math.min(index, 12) * 0.04 }}
+                className="animate-fade-in-up"
+                style={{
+                  animationDelay: `${Math.min(index, 12) * 0.04}s`,
+                  animationDuration: '0.3s',
+                  animationFillMode: 'both',
+                }}
               >
                 <Link href={`/product/${product.slug}`} className="group block h-full">
                   <div className="relative h-full bg-white dark:bg-zinc-800/90 rounded-xl border border-zinc-200/70 dark:border-zinc-700/50 overflow-hidden hover:border-brand-blue/30 dark:hover:border-brand-blue/40 hover:shadow-xl hover:shadow-brand-blue/5 dark:hover:shadow-brand-blue/10 transition-all duration-500">
@@ -135,6 +136,8 @@ export default function SearchResults() {
                           alt={product.name}
                           fill
                           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                          loading={index < 4 ? "eager" : "lazy"}
+                          decoding="async"
                           className="object-cover transition-transform duration-700 group-hover:scale-110"
                         />
                       ) : (
@@ -168,9 +171,8 @@ export default function SearchResults() {
                     </div>
                   </div>
                 </Link>
-              </motion.div>
+              </div>
             ))}
-          </AnimatePresence>
         </div>
       )}
     </div>

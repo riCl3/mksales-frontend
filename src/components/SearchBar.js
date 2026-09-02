@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation'
 import { GRAPHQL_ENDPOINT } from '../lib/constants'
 import { trackSearch } from '../lib/analytics'
 
-async function searchProducts(query) {
+async function searchProducts(query, signal) {
   if (!query || query.length < 2) return []
 
   const gqlQuery = `
@@ -32,10 +32,12 @@ async function searchProducts(query) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ query: gqlQuery, variables: { search: query } }),
+      signal,
     })
     const data = await res.json()
     return data.data?.products?.nodes || []
-  } catch {
+  } catch (e) {
+    if (e.name === 'AbortError') return []
     return []
   }
 }
@@ -48,6 +50,7 @@ export default function SearchBar({ scrolled, isHome = true }) {
   const inputRef = useRef(null)
   const wrapperRef = useRef(null)
   const debounceRef = useRef(null)
+  const abortRef = useRef(null)
   const router = useRouter()
 
   useEffect(() => {
@@ -76,6 +79,7 @@ export default function SearchBar({ scrolled, isHome = true }) {
 
   const debouncedSearch = useCallback((value) => {
     if (debounceRef.current) clearTimeout(debounceRef.current)
+    if (abortRef.current) abortRef.current.abort()
     if (value.length < 2) {
       setResults([])
       setLoading(false)
@@ -83,10 +87,11 @@ export default function SearchBar({ scrolled, isHome = true }) {
     }
     setLoading(true)
     debounceRef.current = setTimeout(async () => {
-      const products = await searchProducts(value)
+      abortRef.current = new AbortController()
+      const products = await searchProducts(value, abortRef.current.signal)
       setResults(products)
       setLoading(false)
-    }, 300)
+    }, 350)
   }, [])
 
   const handleInputChange = (e) => {
@@ -169,6 +174,8 @@ export default function SearchBar({ scrolled, isHome = true }) {
                       alt={product.name}
                       width={48}
                       height={48}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover"
                     />
                   ) : (

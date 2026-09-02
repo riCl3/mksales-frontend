@@ -1,10 +1,18 @@
+import dynamic from 'next/dynamic';
 import Hero from '../components/Hero';
 import TrustSection from '../components/TrustSection';
 import CategoriesSection from '../components/CategoriesSection';
-import WhyChooseUs from '../components/WhyChooseUs';
-import TestimonialsSection from '../components/TestimonialsSection';
 import Link from 'next/link';
 import { WORDPRESS_URL } from '../lib/constants';
+
+const WhyChooseUs = dynamic(() => import('../components/WhyChooseUs'), {
+  ssr: true,
+  loading: () => <div className="py-28 md:py-36 bg-brand-dark animate-pulse" style={{ minHeight: '600px' }} />,
+});
+const TestimonialsSection = dynamic(() => import('../components/TestimonialsSection'), {
+  ssr: true,
+  loading: () => <div className="py-28 md:py-36 bg-slate-900 animate-pulse" style={{ minHeight: '400px' }} />,
+});
 
 export const revalidate = 3600;
 

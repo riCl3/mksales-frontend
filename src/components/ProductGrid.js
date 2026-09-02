@@ -4,20 +4,20 @@ import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
-import { motion, AnimatePresence } from 'framer-motion'
 
 function ProductCard({ product, index }) {
   const name = product.name || 'Product'
   const image = product.image?.sourceUrl
-  const categories = product.productCategories?.nodes || []
 
   return (
-    <motion.div
-      layout
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20, scale: 0.95 }}
-      transition={{ duration: 0.4, delay: Math.min(index, 12) * 0.05, ease: [0.4, 0, 0.2, 1] }}
+    <div
+      className="animate-fade-in-up"
+      style={{
+        animationDelay: `${Math.min(index, 12) * 0.05}s`,
+        animationDuration: '0.4s',
+        animationTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
+        animationFillMode: 'both',
+      }}
     >
       <div className="group h-full">
         <div className="relative h-full rounded-2xl overflow-hidden border border-white/20 dark:border-white/10 shadow-sm hover:shadow-xl hover:shadow-brand-blue/20 transition-all duration-500 backdrop-blur-xl bg-white/60 dark:bg-white/[0.07]">
@@ -33,6 +33,8 @@ function ProductCard({ product, index }) {
                   alt={name}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  loading={index < 4 ? "eager" : "lazy"}
+                  decoding="async"
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
               ) : (
@@ -73,7 +75,7 @@ function ProductCard({ product, index }) {
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   )
 }
 
@@ -148,19 +150,15 @@ export default function ProductGrid({ products = [], categories = [] }) {
         </p>
       </div>
 
-      <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        <AnimatePresence mode="popLayout">
+      <div key={activeCategory} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredProducts.map((product, index) => (
             <ProductCard key={product.slug} product={product} index={index} />
           ))}
-        </AnimatePresence>
-      </motion.div>
+      </div>
 
       {filteredProducts.length === 0 && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="text-center py-20 bg-[#014565] backdrop-blur-sm rounded-2xl border border-white/10 shadow-sm"
+        <div
+          className="text-center py-20 bg-[#014565] backdrop-blur-sm rounded-2xl border border-white/10 shadow-sm animate-fade-in"
         >
           <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
             <svg className="w-8 h-8 text-white/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -175,7 +173,7 @@ export default function ProductGrid({ products = [], categories = [] }) {
           >
             View all products
           </button>
-        </motion.div>
+        </div>
       )}
     </div>
   )

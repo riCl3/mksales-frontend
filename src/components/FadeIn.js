@@ -1,6 +1,28 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
+
+function useInViewOnce(options = {}) {
+  const ref = useRef(null)
+  const [inView, setInView] = useState(false)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setInView(true)
+      return
+    }
+    const obs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setInView(true)
+        obs.disconnect()
+      }
+    }, { threshold: 0.1, rootMargin: '-50px', ...options })
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+  return [ref, inView]
+}
 
 export function FadeIn({ 
   children, 
@@ -9,64 +31,81 @@ export function FadeIn({
   direction = 'up',
   duration = 0.6 
 }) {
-  const directions = {
-    up: { y: 40 },
-    down: { y: -40 },
-    left: { x: 40 },
-    right: { x: -40 },
-    none: { x: 0, y: 0 },
+  const [ref, inView] = useInViewOnce()
+  const transforms = {
+    up: 'translateY(40px)',
+    down: 'translateY(-40px)',
+    left: 'translateX(40px)',
+    right: 'translateX(-40px)',
+    none: 'translate(0, 0)',
   }
-
+  const initialTransform = transforms[direction] || transforms.up
   return (
-    <motion.div
-      initial={{ opacity: 0, ...directions[direction] }}
-      whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: true, margin: '-50px' }}
-      transition={{ duration, delay, ease: [0.4, 0, 0.2, 1] }}
+    <div
+      ref={ref}
       className={className}
+      style={{
+        opacity: inView ? 1 : 0,
+        transform: inView ? 'translate(0, 0)' : initialTransform,
+        transition: `opacity ${duration}s cubic-bezier(0.4, 0, 0.2, 1) ${delay}s, transform ${duration}s cubic-bezier(0.4, 0, 0.2, 1) ${delay}s`,
+        willChange: inView ? 'auto' : 'opacity, transform',
+      }}
     >
       {children}
-    </motion.div>
+    </div>
   )
 }
 
 export function StaggerContainer({ children, className = '', staggerDelay = 0.1 }) {
+  const [ref, inView] = useInViewOnce()
   return (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: '-50px' }}
-      transition={{ staggerChildren: staggerDelay }}
-      className={className}
-    >
-      {children}
-    </motion.div>
+    <div ref={ref} className={className} style={{ opacity: inView ? 1 : undefined }}>
+      {Array.isArray(children) ? children.map((child, i) => (
+        <div
+          key={i}
+          style={{
+            opacity: inView ? 1 : 0,
+            transform: inView ? 'translateY(0)' : 'translateY(30px)',
+            transition: `opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1) ${i * staggerDelay}s, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) ${i * staggerDelay}s`,
+          }}
+        >
+          {child}
+        </div>
+      )) : children}
+    </div>
   )
 }
 
 export function StaggerItem({ children, className = '' }) {
+  const [ref, inView] = useInViewOnce()
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+    <div
+      ref={ref}
       className={className}
+      style={{
+        opacity: inView ? 1 : 0,
+        transform: inView ? 'translateY(0)' : 'translateY(30px)',
+        transition: 'opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+      }}
     >
       {children}
-    </motion.div>
+    </div>
   )
 }
 
 export function ScaleIn({ children, className = '', delay = 0, duration = 0.5 }) {
+  const [ref, inView] = useInViewOnce()
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true, margin: '-50px' }}
-      transition={{ duration, delay, ease: [0.4, 0, 0.2, 1] }}
+    <div
+      ref={ref}
       className={className}
+      style={{
+        opacity: inView ? 1 : 0,
+        transform: inView ? 'scale(1)' : 'scale(0.95)',
+        transition: `opacity ${duration}s cubic-bezier(0.4, 0, 0.2, 1) ${delay}s, transform ${duration}s cubic-bezier(0.4, 0, 0.2, 1) ${delay}s`,
+      }}
     >
       {children}
-    </motion.div>
+    </div>
   )
 }
