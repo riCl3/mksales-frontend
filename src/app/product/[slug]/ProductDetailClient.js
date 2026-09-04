@@ -197,17 +197,19 @@ export default function ProductDetailClient({ product }) {
                 </Link>
               </motion.div>
 
-              <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
-                <a
-                  href={`/product/${product.slug}/viewer`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-8 py-3.5 border-2 border-brand-blue text-brand-blue font-semibold text-sm uppercase tracking-wider hover:bg-brand-blue hover:text-white transition-colors duration-300 rounded-xl font-display"
-                >
-                  <FileText className="w-4 h-4" />
-                  View Details
-                </a>
-              </motion.div>
+              {product.shortDescription?.includes('drive.google.com') && (
+                <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
+                  <a
+                    href={`/product/${product.slug}/viewer`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-8 py-3.5 border-2 border-brand-blue text-brand-blue font-semibold text-sm uppercase tracking-wider hover:bg-brand-blue hover:text-white transition-colors duration-300 rounded-xl font-display"
+                  >
+                    <FileText className="w-4 h-4" />
+                    View Details
+                  </a>
+                </motion.div>
+              )}
             </motion.div>
 
             {/* Trust Badges */}
@@ -234,35 +236,48 @@ export default function ProductDetailClient({ product }) {
           </div>
         </div>
 
-        {/* Specifications Section - Only show when description exists and is not a Drive link (shortDescription is viewer-only) */}
-        {product.description && product.description.trim() !== '' && !product.description.includes('drive.google.com') && (
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.6, ease }}
-            className="mt-20"
-          >
-            {/* Decorative glow behind specs */}
-            <div className="relative">
-              <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-brand-blue/5 dark:bg-brand-blue/8 rounded-full blur-3xl pointer-events-none" />
+        {/* Specifications Section */}
+        {(() => {
+          const desc = product.description?.trim() || '';
+          const shortDesc = product.shortDescription?.trim() || '';
+          const isDriveLink = (html) => html.includes('drive.google.com');
+          let htmlToShow = null;
+          if (desc && !isDriveLink(desc)) htmlToShow = product.description;
+          else if (shortDesc && !isDriveLink(shortDesc)) htmlToShow = product.shortDescription;
+          // Always render Technical Details section to avoid "completely missing" UX.
+          // If no valid HTML (e.g. w-beam-crash-barrier where WP Description is empty and shortDescription is Drive link),
+          // show a placeholder instead of hiding or showing the Drive link.
+          const placeholderHtml = `<p>Technical details for <strong>${product.name}</strong> are available on request. Please contact us for detailed specifications and bulk pricing.</p>`;
+          const finalHtml = htmlToShow || placeholderHtml;
+          return (
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.6, ease }}
+              className="mt-20"
+            >
+              {/* Decorative glow behind specs */}
+              <div className="relative">
+                <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-brand-blue/5 dark:bg-brand-blue/8 rounded-full blur-3xl pointer-events-none" />
 
-              <div className="relative bg-white/60 dark:bg-white/[0.03] backdrop-blur-sm rounded-2xl border border-[#C7C7C7]/30 dark:border-[#1A3A50]/50 p-8 md:p-10 shadow-sm">
-                <div className="max-w-2xl">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="w-1.5 h-8 bg-gradient-to-b from-brand-green to-brand-blue rounded-full" />
-                    <h2 className="text-2xl font-bold text-brand-darkBlue dark:text-white font-display">Technical Details</h2>
+                <div className="relative bg-white/60 dark:bg-white/[0.03] backdrop-blur-sm rounded-2xl border border-[#C7C7C7]/30 dark:border-[#1A3A50]/50 p-8 md:p-10 shadow-sm">
+                  <div className="max-w-2xl">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-1.5 h-8 bg-gradient-to-b from-brand-green to-brand-blue rounded-full" />
+                      <h2 className="text-2xl font-bold text-brand-darkBlue dark:text-white font-display">Technical Details</h2>
+                    </div>
+                    <div className="section-accent mb-8 ml-[18px]" />
+                    <div
+                      className="text-base text-zinc-600 dark:text-zinc-300 leading-relaxed prose prose-slate dark:prose-invert max-w-none"
+                      dangerouslySetInnerHTML={{ __html: finalHtml }}
+                    />
                   </div>
-                  <div className="section-accent mb-8 ml-[18px]" />
-                  <div
-                    className="text-base text-zinc-600 dark:text-zinc-300 leading-relaxed prose prose-slate dark:prose-invert max-w-none"
-                    dangerouslySetInnerHTML={{ __html: product.description }}
-                  />
                 </div>
               </div>
-            </div>
-          </motion.div>
-        )}
+            </motion.div>
+          );
+        })()}
       </section>
     </motion.main>
   )
