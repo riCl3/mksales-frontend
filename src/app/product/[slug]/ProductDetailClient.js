@@ -234,8 +234,8 @@ export default function ProductDetailClient({ product }) {
           </div>
         </div>
 
-        {/* Specifications Section */}
-        {(product.description || product.shortDescription) && (
+        {/* Specifications Section - Only show when description exists and is not a Drive link (shortDescription is viewer-only) */}
+        {product.description && product.description.trim() !== '' && !product.description.includes('drive.google.com') && (
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -256,7 +256,7 @@ export default function ProductDetailClient({ product }) {
                   <div className="section-accent mb-8 ml-[18px]" />
                   <div
                     className="text-base text-zinc-600 dark:text-zinc-300 leading-relaxed prose prose-slate dark:prose-invert max-w-none"
-                    dangerouslySetInnerHTML={{ __html: product.description || product.shortDescription }}
+                    dangerouslySetInnerHTML={{ __html: product.description }}
                   />
                 </div>
               </div>
