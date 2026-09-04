@@ -34,7 +34,7 @@ async function getProduct(slug) {
     const res = await fetch(GRAPHQL_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      next: { revalidate: 3600 },
+      next: { revalidate: 60 },
       body: JSON.stringify({ query, variables: { id: productSlug } }),
     });
 
@@ -46,7 +46,7 @@ async function getProduct(slug) {
   }
 }
 
-export const revalidate = 3600;
+export const revalidate = 60;
 
 export default async function ProductPage({ params }) {
   const { slug } = await params;
